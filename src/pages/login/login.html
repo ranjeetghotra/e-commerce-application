@@ -1,0 +1,28 @@
+<ion-content>
+  <ion-card> <img src="assets/imgs/header.png" class="logo"> </ion-card> <div class="login">
+    <form [formGroup]="loginForm" novalidate>
+      <!-- Login form -->
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="mail" item-start class="text-white"></ion-icon> Email
+        </ion-label>
+        <ion-input type="email" value="" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="lock" item-start class="text-white"></ion-icon> Password
+        </ion-label>
+        <ion-input type="password" value="" formControlName="password"></ion-input>
+      </ion-item>
+      <p text-right ion-text color="white" tappable (click)="reset()"><strong>Forgot Password?</strong></p>
+      <div> <button type="submit" ion-button icon-start large block color="secondary" [disabled]="!loginForm.valid"
+          (click)="login()"> SIGN IN </button> <button type="button" clear ion-button icon-start block color="dark"
+          (click)="register()" style="margin-top:20px;"> Register </button>
+        <div class="btn_container">
+          <button class="facebook" ion-button full (click)="fbAction();">Login with Facebook</button>
+          <button class="google" ion-button full (click)="gAction();">Login with Google</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ion-content>

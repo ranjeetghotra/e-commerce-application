@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>Blog</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-card *ngFor="let blog of blogs" (click)="detail(blog.title,blog.desc,blog.image);"> <img src="{{blog.image}}" />
+    <ion-card-content>
+      <ion-card-title> {{blog.title}} </ion-card-title>
+      <p> {{blog.summery}} </p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

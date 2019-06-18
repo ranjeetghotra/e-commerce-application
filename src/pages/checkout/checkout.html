@@ -1,0 +1,97 @@
+<ion-header>
+    <ion-navbar color="secondary">
+      <ion-title>Checkout</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding>
+    <ion-list>
+      <ion-list-header> Order Summary </ion-list-header>
+      <ion-item *ngFor="let x of cart">
+        <ion-avatar item-start> <img src="{{x.img}}"> </ion-avatar>
+        <h2>{{x.product_name}}
+        </h2>
+        <p>Price: {{x.price}} &middot; Qty: {{x.quantity}}</p>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header (click)="toggleGroup(1)" [ngClass]="{active: isGroupShown(1)}"> Shipping Address <ion-icon
+          name="arrow-dropdown-circle" [name]="isGroupShown(1) ? 'arrow-dropup-circle' : 'arrow-dropdown-circle'">
+        </ion-icon>
+      </ion-list-header>
+      <span *ngIf="isGroupShown(1)" class="shipAdd">
+        <ion-row>
+          <ion-col>
+            <ion-label stacked>Select from addresses</ion-label>
+          </ion-col>
+          <ion-col col-12>
+            <button ion-button color="primary" block (click)="chooseAddress()">Select from addresses</button>
+          </ion-col>
+        </ion-row>
+        <form [formGroup]="shippingForm" novalidate>
+          <ion-item>
+            <ion-label stacked>Address Line 1</ion-label>
+            <ion-input type="text" formControlName="address1" value="{{address1}}"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Address Line 2</ion-label>
+            <ion-input type="text" formControlName="address2" value="{{address2}}"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>City</ion-label>
+            <ion-input type="text" formControlName="city" value="{{city}}"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>State</ion-label>
+            <ion-input type="text" formControlName="state" value="{{state}}">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Country</ion-label>
+            <ion-input type="text" formControlName="country" value="{{country}}"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Postcode/Zip</ion-label>
+            <ion-input type="number" (change)="zipCodeChanged($event)" formControlName="zip" value="{{zip}}">
+            </ion-input>
+          </ion-item>
+        </form>
+      </span>
+    </ion-list>
+    <form [formGroup]="couponForm" novalidate>
+      <ion-list class="coupon">
+        <ion-list-header> Apply Coupon <ion-icon name="pricetags"></ion-icon>
+        </ion-list-header> <span class="cc">
+          <ion-item>
+            <ion-label stacked>Enter Coupon Code</ion-label>
+            <ion-input type="text" formControlName="coupon" [(ngModel)]="presentCoupon"></ion-input>
+          </ion-item> <span class="c_error" *ngIf="couponError">
+            <ion-icon name="alert"></ion-icon> &nbsp; Coupon is invalid
+          </span>
+          <span class="c_success" *ngIf="couponSuccess">
+            <ion-icon name="checkmark-circle"></ion-icon> &nbsp; Coupon is
+            applied
+          </span>
+          <ion-row>
+            <ion-col col-6> <button ion-button color="danger" block clear *ngIf="couponRemove"
+                (click)="removeCoupon()">Remove</button> </ion-col>
+            <ion-col col-6> <button ion-button color="primary" block (click)="applyCoupon()"
+                [disabled]="!couponForm.valid">Apply</button>
+            </ion-col>
+          </ion-row>
+        </span>
+      </ion-list>
+    </form>
+  </ion-content>
+  <ion-footer no-border>
+    <ion-toolbar *ngIf="showGrand">
+      <ion-row class="toCart">
+        <ion-col col-6>
+          <span class="shipping"> Shipping: &#8377; {{shipping}} </span>
+          <span class="total"> Total: &#8377; {{grand}} </span>
+  
+        </ion-col>
+        <ion-col col-6> <button ion-button color="secondary" block (click)="presentActionSheet()"
+            [disabled]="!shippingForm.valid">Payment Options</button> </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </ion-footer>

@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar color="secondary"> <button ion-button icon-only menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Cart</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content> <span *ngIf="status==='NOT_OK'" class="no_ok">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3></ion-col>
+        <ion-col col-6> <img src="assets/imgs/icons/empty_wishlist.png"> </ion-col>
+        <ion-col col-3></ion-col>
+        <ion-col col-12> <button ion-button block small color="danger" clear>Cart is empty</button> </ion-col>
+      </ion-row>
+    </ion-grid>
+  </span> <span *ngIf="status==='OK'">
+    <ion-row *ngFor="let x of cart.products; let i = index;" class="cart" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'">
+      <ion-col col-3>
+        <div class="img" [ngStyle]="{'background-image': 'url(' + x.img + ')'}"
+          (tap)="viewProduct(x.product_id, x.product_name,x.img,x.short_desc,x.price_unit)"></div>
+      </ion-col>
+      <ion-col col-7 class="name"> <span class="title">{{x.product_name}}</span>
+        <ion-row class="martop"> <button ion-button color="light" round class="gol">
+            <ion-icon name="remove" (click)="downQty(x.product_id)"></ion-icon>
+          </button> <span class="qty">{{x.quantity}}</span> <button ion-button color="light" round class="gol">
+            <ion-icon name="add" (click)="upQty(x.product_id)"></ion-icon>
+          </button> </ion-row>
+        <ion-row class="price"> &#8377; {{x.price}} </ion-row>
+      </ion-col>
+      <ion-col col-2> <button ion-button color="danger" icon-only clear float-right (click)="remove(x.product_id)">
+          <ion-icon name="ios-trash"></ion-icon>
+        </button> </ion-col>
+      <ion-col col-12 class="bulk_notice" *ngIf="x.bulk_amount_single !== 0 && x.bulk!==0">
+        <b>{{x.bulk_amount_single}}%</b> of bulk discount is applied on this product </ion-col>
+    </ion-row>
+  </span> <span class="gap"> </span></ion-content>
+<ion-footer no-border>
+  <ion-toolbar *ngIf="status==='OK'">
+    <ion-row class="toCart">
+      <ion-col col-6> <span class="total"> Total: &#8377; {{grand}} </span> </ion-col>
+      <ion-col col-6> <button ion-button color="secondary" block (click)="checkout()">Checkout</button> </ion-col>
+    </ion-row>
+  </ion-toolbar>

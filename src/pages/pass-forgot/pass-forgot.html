@@ -1,0 +1,28 @@
+<!--
+  Generated template for the PassForgotPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Reset Your Password</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <ion-card no-shadow> <img src="assets/imgs/header.png" class="logo"> </ion-card> <span class="login">
+    <form [formGroup]="loginForm" novalidate>
+      <!-- Login form -->
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="mail" item-start class="text-white"></ion-icon> Email
+        </ion-label>
+        <ion-input type="email" value="" formControlName="email"></ion-input>
+      </ion-item>
+      <div class="btn-wrap"> <button type="submit" ion-button icon-start large block color="secondary" [disabled]="!loginForm.valid"
+          (click)="reset()"> Reset </button></div>
+    </form>
+  </span>
+</ion-content>

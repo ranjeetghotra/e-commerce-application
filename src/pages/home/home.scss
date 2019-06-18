@@ -1,0 +1,227 @@
+
+page-home ion-header {
+    background: #000 !important;
+  }
+  
+  page-home .toolbar-background-md {
+    border-color: #5fa62a;
+    background: #5fa62a;
+  }
+  
+  page-home .brand_card {
+    border-radius: 5px !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+  }
+  
+  page-home .bar-button-menutoggle {
+    color: #fff;
+  }
+  
+  page-home ion-header .button-md {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  
+  page-home ion-header .toolbar-title img {
+    height: 38px;
+  }
+  
+  page-home .padding-left {
+    padding-left: 10px;
+  }
+  
+  page-home .padding-right {
+    padding-right: 10px;
+  }
+  
+  page-home .searchBlock p {
+    color: #66af2e;
+    font-weight: bold;
+  }
+  
+  page-home .mainBlock {
+    display: block;
+  }
+  
+  page-home .slides {
+    height: 150px;
+  }
+  
+  page-home .slides img{
+    height: 150px;
+    width:100%;
+    object-fit: cover;
+  }
+
+  page-home .slidesCat {
+    height: 40px;
+    padding: 5px 2px;
+    width: 100%;
+    padding-left: 15px;
+    text-align: left;
+    background: #F5F5F5;
+  }
+  
+  page-home .slidesCat .slide-zoom {
+    font-size: 14px;
+    text-align: left;
+    color: #6E6E6E;
+  }
+  
+  page-home .slidesCat ion-slide {
+    width: auto !important;
+    padding: 0 10px;
+  }
+  
+  page-home .all {
+    width: 30px !important;
+    padding: 0 !important;
+  }
+  
+  page-home .catHead {
+    padding: 20px 15px;
+    color: #6E6E6E;
+    font-size: 1.1em !important;
+    border-bottom: 1px solid #F2F2F2;
+    display: block;
+    width: 100%;
+    position: relative;
+  }
+  
+  page-home .slcat {
+    height: 60px !important;
+  }
+  
+  page-home .catHead button {
+    float: right;
+    position: absolute;
+    right: 15px;
+    color: #60A7BF;
+    font-size: 13px;
+    padding: 10px 0;
+    top: 15px;
+    font-weight: normal;
+  }
+  
+  page-home .catHead .title {
+    font-weight: 600;
+  }
+  
+  page-home .slidesProd {
+    padding: 10px;
+    background: #f4f4f4;
+    min-height: 20em;
+    overflow: hidden;
+  }
+  
+  page-home .slidesProd .image {
+    width: 100%;
+    padding: 5px;
+    margin-top: 0.6em;
+  }
+  
+  page-home .slidesProd .prodItem {
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    padding: 0 10px;
+  }
+  
+  page-home .slidesProd .image {
+    border: 0px solid #f2f2f2;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 20em;
+  }
+  
+  page-home .slidesProd2 {
+    overflow: hidden;
+  }
+  
+  page-home .slidesProd2 .image {
+    width: 100%;
+    padding: 5px;
+    margin-top: 0.6em;
+  }
+  
+  page-home .slidesProd2 .col {
+    padding: 0 !important;
+  }
+  
+  page-home .slidesProd2 .prodItem {
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+  
+  page-home .slidesProd2 .image {
+    border: 0px solid #f2f2f2;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 10em;
+  }
+  
+  page-home .slidesProd h1 {
+    font-size: 1em;
+    color: #646464;
+    text-align: left;
+    margin-top: 10px;
+  }
+  
+  page-home .slidesProd .price {
+    font-size: 0.8em;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 0px;
+    color: #66af2e;
+  }
+  
+  page-home .button-group {
+    padding: 0 !important;
+  }
+  
+  page-home .button-group .col {
+    padding: 0 !important;
+  }
+  
+  page-home .button-group .wish .button-inner {
+    color: #FA7152;
+  }
+  
+  page-home .button-group .cart {
+    float: left;
+    margin-right: 30px;
+  }
+  
+  page-home .button-group ion-icon {
+    font-size: 2.8em;
+  }
+  
+  page-home .discount {
+    position: absolute;
+    padding: 5px 8px;
+    background: #5fa62a;
+    color: #fff;
+    margin-top: 8px;
+    border-radius: 5px 0 5px 0;
+  }
+  
+  page-home .stock {
+    position: absolute;
+    padding: 5px 8px;
+    background: #f53d3d;
+    color: #fff;
+    margin-top: 8px;
+    border-radius: 5px 0 5px 0;
+  }

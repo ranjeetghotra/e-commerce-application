@@ -1,0 +1,31 @@
+
+page-wallet .balance {
+    text-align: center;
+    font-size: 50px !important;
+    display: block;
+    width: 100%;
+    font-weight: bold;
+    padding-top: 10px;
+    color: #222;
+  }
+  
+  page-wallet .bal {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: normal;
+    display: block;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    text-align: center;
+  }
+  
+  page-wallet .list-header {
+    font-weight: bold !important;
+    border: 0 !important;
+  }
+  
+  page-wallet .time {
+    float: right;
+  }
+  

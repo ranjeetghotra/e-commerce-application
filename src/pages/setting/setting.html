@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-navbar color="secondary"> <button ion-button icon-only menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title> Account Settings </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      <span> Account </span>
+
+      <button ion-button item-end icon-only clear>
+        <ion-icon name="person"></ion-icon>
+      </button>
+    </ion-list-header>
+    <span>
+      <button ion-item class="transparent" (click)="account()">
+        <ion-icon name="person" item-start></ion-icon> Account <ion-icon name="ios-arrow-forward-outline" item-end
+          class="arrow"></ion-icon>
+
+      </button>
+      <button ion-item class="transparent" (click)="notification()">
+        <ion-icon name="notifications" item-start></ion-icon> Notifications <ion-icon name="ios-arrow-forward-outline"
+          item-end class="arrow"></ion-icon>
+      </button>
+    </span>
+    <ion-list-header>
+      <span> Manage Wallet </span>
+      <button ion-button item-end icon-only clear>
+        <ion-icon name="card"></ion-icon>
+      </button>
+    </ion-list-header>
+    <span>
+      <button ion-item class="transparent" (click)="wallet();">
+        <ion-icon name="card" item-start></ion-icon> Deposit <ion-icon name="ios-arrow-forward-outline" item-end
+          class="arrow">
+        </ion-icon>
+      </button>
+      <button ion-item class="transparent" (click)="history();">
+        <ion-icon name="clock" item-start></ion-icon> History <ion-icon name="ios-arrow-forward-outline" item-end
+          class="arrow"></ion-icon>
+      </button>
+    </span>
+
+    <ion-list-header>
+      <span> Manage Addresses </span>
+      <button ion-button item-end icon-only clear>
+        <ion-icon name="ios-pin"></ion-icon>
+      </button>
+    </ion-list-header>
+    <span>
+      <button ion-item class="transparent" (click)="add_address();">
+        <ion-icon name="ios-pin" item-start></ion-icon> Add New Address <ion-icon name="ios-arrow-forward-outline"
+          item-end class="arrow">
+        </ion-icon>
+      </button>
+      <button ion-item class="transparent" (click)="all_address();">
+        <ion-icon name="ios-pin" item-start></ion-icon> All Address
+
+        <ion-icon name="ios-arrow-forward-outline" item-end class="arrow"></ion-icon>
+      </button>
+    </span>
+
+
+    <ion-list-header> <span> Others </span> <button ion-button item-end icon-only clear>
+        <ion-icon name="help"></ion-icon>
+      </button> </ion-list-header> <span> <button ion-item class="transparent" (click)="privacy()">
+        <ion-icon name="lock" item-start></ion-icon> Privacy <ion-icon name="ios-arrow-forward-outline" item-end
+          class="arrow"></ion-icon>
+      </button> <button ion-item class="transparent" (click)="about()">
+        <ion-icon name="help" item-start></ion-icon> About Us <ion-icon name="ios-arrow-forward-outline" item-end
+          class="arrow"></ion-icon>
+      </button> <button ion-item class="transparent logout" (tap)="logout();">
+        <ion-icon name="log-out" item-start></ion-icon> Logout
+      </button> </span>
+  </ion-list>
+</ion-content>

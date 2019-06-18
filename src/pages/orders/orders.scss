@@ -1,0 +1,46 @@
+
+page-orders ion-header .button-md {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  
+  page-orders ion-header .toolbar-title img {
+    height: 38px;
+  }
+  
+  page-orders .oid {
+    display: block;
+    border-radius: 50%;
+    width: 70px;
+    line-height: 70px;
+    text-align: center;
+    height: 70px;
+    background: #569759;
+    font-size: 15px;
+    color: #fff;
+    margin-top: 15px;
+  }
+  
+  page-orders .orow {
+    padding-left: 10px;
+    border-bottom: 1px solid #e4e4e4;
+    padding-bottom: 15px;
+  }
+  
+  page-orders .odetail {
+    padding-left: 10px;
+    margin-top: 10px;
+  }
+  
+  page-orders .odetail p {
+    border: 0px solid #000;
+    margin: 0;
+    margin-top: 5px;
+  }
+  
+  page-orders .odetail p span {
+    font-weight: bold;
+    float: right;
+    padding-right: 15px;
+  }
+  

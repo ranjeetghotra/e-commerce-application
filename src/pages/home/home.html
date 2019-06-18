@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar color="secondary"> <button ion-button icon-only menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Swasthya Shopee</ion-title>
+    <ion-buttons end class="padding-right" (click)="openCart();"> <button ion-button icon-only color="light">
+        <ion-icon name="basket"></ion-icon>
+      </button> </ion-buttons>
+  </ion-navbar>
+  <ion-navbar color="secondary">
+    <ion-searchbar #searchbar [showCancelButton]="true" [(ngModel)]="searchString" (ionInput)="searchThis($event)"
+      (ionCancel)="cancelSearch($event)" [disabled]='true'> </ion-searchbar>
+  </ion-navbar>
+</ion-header>
+<ion-icon (click)="toggle()" name="search"></ion-icon>
+<ion-content> <span class="searchBlock" *ngIf="toggled">
+    <ion-list>
+      <ion-list-header *ngIf="!searchString"> Featured Products </ion-list-header>
+      <ion-item *ngFor="let f of featured" (click)="product(f.id,f.name,f.images[0].src, f.short_description, f.price)">
+        <ion-avatar item-start> <img src="{{f.images[0].src}}"> </ion-avatar>
+        <h2>{{f.name}}</h2>
+        <p>&#8377; {{f.price}}</p>
+      </ion-item>
+    </ion-list>
+  </span> <span class="mainBlock" *ngIf="!toggled">
+    <ion-slides *ngIf="banners && banners.length" class="slides" autoplay="5000" loop="true" effect="fade">
+      <ion-slide *ngFor="let banner of banners">
+        <img src="{{banner}}" /></ion-slide>
+    </ion-slides>
+    <ion-slides class="slidesCat" slidesPerView="2.5">
+      <ion-slide class="all"> All </ion-slide>
+      <ion-slide *ngFor="let x of cats" (tap)="cat(x.id, x.name)"> {{x.name}} </ion-slide>
+    </ion-slides>
+    <ion-row class="slidesProd2"> <span class="catHead slcat"> <span class="title">Our Brands</span> <button ion-button
+          small clear (click)="allBrand()">View All</button> </span>
+      <ion-slides slidesPerView="3.5">
+        <ion-slide *ngFor="let b of brands" (tap)="brand(b.id,b.name)"> <img src="{{b.image.src}}"> </ion-slide>
+      </ion-slides>
+    </ion-row>
+    <ion-row *ngFor="let y of prods"> <span class="catHead"> <span class="title">{{y.category.name}}</span> <button
+          ion-button small clear (tap)="cat(y.category.id)">View All</button> </span>
+      <ion-row class="slidesProd">
+        <ion-col col-6 *ngFor="let z of y.category.products" class="prodItem"
+          (tap)="product(z.id,z.full_name,z.images[0].src,z.short_description, z.price, z.video, z.stock);">
+          <div class="discount" *ngIf="z.hasDiscount && z.stock > 0"> {{z.discount}} </div>
+          <div class="stock" *ngIf="z.stock == 0"> Out of Stock </div>
+          <div class="image" [style.backgroundImage]="'url(' + z.images[0].src + ')'"> </div>
+          <h1>{{z.name}}</h1>
+          <p class="price">&#8377; {{z.price}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-row>
+  </span></ion-content>

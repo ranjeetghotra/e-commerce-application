@@ -1,0 +1,75 @@
+<ion-menu [content]="content">
+    <ion-header class="sideHeader"> 
+        <img src="assets/imgs/icon.png">
+         <span class="name">Customer Shop</span>
+          <span class="wallet">Wallet: &#8377; 1235</span>
+         </ion-header>
+    <ion-content class="belowHeader">
+        <ion-list>
+            <ion-item ion-item *ngFor="let p of cats;  let i=index" class="sidebarMenu">
+                <ion-row>
+                    <!-- Parent Pages  -->
+                    <ion-col col-12 class="menu-name"> <span ion-text> <span menuClose
+                                (tap)="cat(p.category.id, p.category.name)">{{p.category.name}}</span>
+                            <ion-icon [name]="selectedMenu == i? 'remove' : 'add'" *ngIf="p.category.sub_category"
+                                float-right (click)="openPage(p, i);$event.stopPropagation();"></ion-icon>
+                        </span> <!-- Child Pages  -->
+                        <ion-list no-lines [hidden]="selectedMenu != i">
+                            <ion-item no-border *ngFor="let subPage of p.category.sub_category;let i2=index" text-wrap>
+                                <ion-row>
+                                    <ion-col col-12 class="menu-name"> <span ion-text color="color2"> <span menuClose
+                                                (tap)="sub(subPage.id, subPage.name)">&nbsp;{{subPage.name}}</span>
+                                            <ion-icon [name]="selectedMenu2 == i2? 'remove' : 'add'"
+                                                *ngIf="subPage.child_category" float-right
+                                                (click)="openPage2(subPage,i2);$event.stopPropagation();"></ion-icon>
+                                        </span>
+                                        <ion-list no-lines [hidden]="selectedMenu2 != i2">
+                                            <ion-item no-border
+                                                *ngFor="let childPage of subPage.child_category;let i3=index" text-wrap>
+                                                <ion-row>
+                                                    <ion-col col-12 class="menu-name"> <span menuClose
+                                                            (click)="sub(childPage.id, childPage.name)" ion-text
+                                                            color="color2"> &nbsp;{{childPage.name}} </span> </ion-col>
+                                                </ion-row>
+                                            </ion-item>
+                                        </ion-list>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-item>
+                        </ion-list>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+            <ion-item class="sidebarMenu">
+                <ion-row>
+                    <!-- Parent Pages  -->
+                    <ion-col col-12 class="menu-name">
+                        <span ion-text>
+                            <button menuClose ion-button block clear (tap)="blog();" class="textLeft">Blog</button>
+                        </span>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+            <ion-item class="sidebarMenu">
+                <ion-row>
+                    <!-- Parent Pages  -->
+                    <ion-col col-12 class="menu-name">
+                        <button menuClose ion-button block clear (tap)="wallet();" class="textLeft">Wallet</button>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+            <ion-item class="sidebarMenu">
+                <ion-row>
+                    <!-- Parent Pages  -->
+                    <ion-col col-12 class="menu-name">
+                        <span ion-text>
+                            <button menuClose ion-button block clear (tap)="account();"
+                                class="textLeft">Account</button>
+                        </span>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

@@ -1,0 +1,37 @@
+ 
+page-login ion-card, page-login .card-md {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    margin-top: 60px;
+    display: block;
+    padding: 0 10%;
+    text-align: center;
+  }
+  
+  page-login .logo {
+    width: 100%;
+  }
+  
+  page-login .login {
+    padding: 15px;
+  }
+  
+  page-login .login .item-md {
+    padding-left: 0;
+  }
+  
+  page-login .login .item-label-floating .input-wrapper {
+    padding-left: 10px;
+  }
+
+  page-login .btn_container {
+    padding-top: 14px;
+
+    .facebook {
+        background: #3b5998;
+    }
+    .google{
+      background: #ea4335;
+    }
+}
+  

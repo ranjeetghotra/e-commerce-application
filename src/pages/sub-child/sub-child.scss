@@ -1,0 +1,141 @@
+ 
+
+page-sub-child .slides {
+    height: 150px;
+  }
+  
+  page-sub-child .slidesCat {
+    height: 40px;
+    padding: 5px 2px;
+    width: 100%;
+    padding-left: 15px;
+    text-align: left;
+    background: #F5F5F5;
+  }
+  
+  page-sub-child .slidesCat .slide-zoom {
+    font-size: 14px;
+    text-align: left;
+    color: #6E6E6E;
+  }
+  
+  page-sub-child .slidesCat ion-slide {
+    width: auto !important;
+    padding: 0 10px;
+  }
+  
+  page-sub-child .all {
+    width: 30px !important;
+    padding: 0 !important;
+  }
+  
+  page-sub-child .catHead {
+    padding: 20px 15px;
+    color: #6E6E6E;
+    font-size: 1.1em !important;
+    border-bottom: 1px solid #F2F2F2;
+    display: block;
+    width: 100%;
+    position: relative;
+  }
+  
+  page-sub-child .catHead button {
+    float: right;
+    position: absolute;
+    right: 15px;
+    color: #60A7BF;
+    font-size: 13px;
+    padding: 10px 0;
+    top: 15px;
+    font-weight: normal;
+  }
+  
+  page-sub-child .catHead .title {
+    font-weight: 600;
+  }
+  
+  page-sub-child .slidesProd {
+    padding: 10px;
+    background: #f4f4f4;
+    min-height: 20em;
+    overflow: hidden;
+  }
+  
+  page-sub-child .slidesProd .image {
+    width: 100%;
+    padding: 5px;
+    margin-top: 0.6em;
+  }
+  
+  page-sub-child .slidesProd .prodItem {
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+  
+  page-sub-child .slidesProd .image {
+    border: 0px solid #f2f2f2;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 20em;
+  }
+  
+  page-sub-child .slidesProd h1 {
+    font-size: 1em;
+    color: #646464;
+    text-align: left;
+    margin-top: 10px;
+  }
+  
+  page-sub-child .slidesProd .price {
+    font-size: 0.8em;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 0px;
+    color: #66af2e;
+  }
+  
+  page-sub-child .button-group {
+    padding: 0 !important;
+  }
+  
+  page-sub-child .button-group .col {
+    padding: 0 !important;
+  }
+  
+  page-sub-child .button-group .wish .button-inner {
+    color: #FA7152;
+  }
+  
+  page-sub-child .button-group .cart {
+    float: left;
+    margin-right: 30px;
+  }
+  
+  page-sub-child .button-group ion-icon {
+    font-size: 2.8em;
+  }
+  
+  page-sub-child .discount {
+    position: absolute;
+    padding: 5px 8px;
+    background: #5fa62a;
+    color: #fff;
+    margin-top: 8px;
+    border-radius: 5px 0 5px 0;
+  }
+  
+  page-sub-child .stock {
+    position: absolute;
+    padding: 5px 8px;
+    background: #f53d3d;
+    color: #fff;
+    margin-top: 8px;
+    border-radius: 5px 0 5px 0;
+  }
+  

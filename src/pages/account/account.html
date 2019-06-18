@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>My Account</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label stacked>First Name</ion-label>
+      <ion-input type="text" [(ngModel)]="fname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Last Name</ion-label>
+      <ion-input type="text" [(ngModel)]="lname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Phone
+      </ion-label>
+      <ion-input type="number" [(ngModel)]="phone" readonly></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Address 1</ion-label>
+      <ion-input type="text" [(ngModel)]="address1"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Address 2</ion-label>
+      <ion-input type="text" [(ngModel)]="address2"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>City</ion-label>
+      <ion-input type="text" [(ngModel)]="city"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>State
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="state"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Country</ion-label>
+      <ion-input type="text" [(ngModel)]="country"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Zip</ion-label>
+      <ion-input type="number" [(ngModel)]="zip"></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="primary"> <button ion-button full clear color="light" (click)="update()">Update</button>
+  </ion-toolbar>
+</ion-footer>

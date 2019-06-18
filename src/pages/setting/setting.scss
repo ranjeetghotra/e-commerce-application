@@ -1,0 +1,65 @@
+
+page-setting ion-header .button-md {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  
+  page-setting ion-header .toolbar-title img {
+    height: 38px;
+  }
+  
+  page-setting ion-title img {
+    height: 48px;
+    margin-top: 5px;
+  }
+  
+  page-setting .transparent {
+    background: transparent !important;
+    color: #3c3c3c !important;
+  }
+  
+  page-setting .logout {
+    color: #BF5F5A !important;
+    font-weight: bold;
+  }
+  
+  page-setting .logout .item-inner {
+    border: 0 !important;
+  }
+  
+  page-setting .list-md .item-block .item-inner {
+    border-bottom: 1px solid #f1f1f1;
+  }
+  
+  page-setting .arrow {
+    color: #f1f1f1;
+  }
+  
+  page-setting ion-list-header {
+    background: transparent !important;
+    border: 0 !important;
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+  
+  page-setting ion-list-header span {
+    text-align: left;
+  }
+  
+  page-setting ion-list-header button {
+    margin-right: 10px !important;
+  }
+  
+  page-setting ion-list-header button ion-icon {
+    color: #f1f1f1;
+  }
+  
+  page-setting ion-list span {
+    padding: 0 15px !important;
+    display: block;
+  }
+  
+  page-setting ion-list-header span {
+    margin-left: 0px;
+  }
+  

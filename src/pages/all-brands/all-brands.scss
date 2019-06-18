@@ -1,0 +1,59 @@
+ 
+page-all-brands .slidesProd2 {
+    min-height: 20em;
+    overflow: hidden;
+  }
+  
+  page-all-brands .slidesProd2 .image {
+    width: 100%;
+    padding: 5px;
+    margin-top: 0.6em;
+  }
+  
+  page-all-brands .slidesProd2 .col {
+    padding: 0 !important;
+  }
+  
+  page-all-brands .slidesProd2 .prodItem {
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+  
+  page-all-brands .slidesProd2 .image {
+    border: 0px solid #f2f2f2;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 10em;
+  }
+  
+  page-all-brands .catHead {
+    padding: 20px 15px;
+    color: #6E6E6E;
+    font-size: 1.1em !important;
+    border-bottom: 1px solid #F2F2F2;
+    display: block;
+    width: 100%;
+    position: relative;
+  }
+  
+  page-all-brands .catHead button {
+    float: right;
+    position: absolute;
+    right: 15px;
+    color: #60A7BF;
+    font-size: 13px;
+    padding: 10px 0;
+    top: 15px;
+    font-weight: normal;
+  }
+  
+  page-all-brands .catHead .title {
+    font-weight: 600;
+  }
+  

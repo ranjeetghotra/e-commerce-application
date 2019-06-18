@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>All Brands</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row class="slidesProd2">
+    <ion-col col-6 *ngFor="let b of brands" class="prodItem" (tap)="brand(b.id)">
+      <ion-card class="brand_card">
+        <div class="image" [style.backgroundImage]="'url(' + b.image.src + ')'"> </div>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

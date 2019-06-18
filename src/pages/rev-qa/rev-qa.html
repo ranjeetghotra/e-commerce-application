@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ionic3-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline" activeColor="#EBE85E" defaultColor="#cfcfcf"
+    readonly="false" [rating]="0" *ngIf="showForm"></ionic3-star-rating>
+  <ion-list *ngIf="showForm">
+    <ion-item *ngFor="let txt of q; let i = index">
+      <ion-label stacked> {{txt.question}}
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="answer[i]"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="showForm2">
+    <ion-item>
+      <ion-label stacked>Ask your question</ion-label>
+      <ion-input type="text" [(ngModel)]="question"></ion-input>
+    </ion-item>
+  </ion-list>
+  
+<ion-footer *ngIf="showForm">
+    <ion-toolbar color="primary"> <button ion-button clear full (click)="submit();" color="light">Submit</button>
+    </ion-toolbar>
+  </ion-footer>
+  <ion-footer *ngIf="showForm2">
+    <ion-toolbar color="primary"> <button ion-button clear full (click)="submit2();" color="light">Ask</button>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>

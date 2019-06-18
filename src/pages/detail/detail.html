@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>Order ID: #{{oid}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-row class="gap">
+    <ion-col col-6>
+      <ion-list-header class="noPadd">
+        Invoice Total </ion-list-header>
+      <p class="total">&#8377; {{grand_total}}</p>
+    </ion-col>
+    <ion-col col-6>
+      <ion-list-header class="noPadd headRight"> Order Date </ion-list-header>
+      <p text-right class="date">
+        {{placedOn}}</p>
+    </ion-col>
+  </ion-row>
+  <ion-list>
+    <ion-list-header> Items </ion-list-header>
+    <ion-item *ngFor="let x of products">
+      <ion-avatar item-start> <img src="{{x.image}}"> </ion-avatar>
+      <h2>{{x.title}}</h2>
+      <p>Price: {{x.price}} &middot; Qty: {{x.qty}}</p>
+    </ion-item>
+  </ion-list>
+  <ion-row>
+    <ion-col col-6>
+      <ion-list-header class="noPadd"> Shipping Address </ion-list-header>
+      <p *ngIf="fname != ''">{{fname}} {{lname}}</p>
+      <p *ngIf="add1 != ''">{{add1}}</p>
+      <p *ngIf="add2 != ''">{{add2}}</p>
+      <p *ngIf="city != ''">{{city}}, {{state}}</p>
+      <p *ngIf="country != ''">{{country}} - {{zip}}</p>
+      <p *ngIf="email != ''">{{email}}</p>
+      <p *ngIf="phone != ''">{{phone}}</p>
+    </ion-col>
+    <ion-col col-6>
+      <ion-list-header class="noPadd"> Billing
+        Address </ion-list-header>
+      <p *ngIf="bfname != ''">{{bfname}} {{blname}}</p>
+      <p *ngIf="badd1 != ''">
+        {{badd1}}</p>
+      <p *ngIf="badd2 != ''">{{badd2}}</p>
+      <p *ngIf="bcity != ''">{{bcity}}, {{bstate}}</p>
+      <p *ngIf="bcountry != ''">{{bcountry}} - {{bzip}}</p>
+      <p *ngIf="bemail != ''">{{bemail}}</p>
+      <p *ngIf="bphone != ''">{{bphone}}</p>
+    </ion-col>
+  </ion-row>
+  <ion-list>
+    <ion-item>
+      <ion-icon name="card" item-start></ion-icon> Payment <ion-note item-end>{{payment_status}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="bus" item-start></ion-icon> Delivery <ion-note item-end>{{delivery_status}}
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

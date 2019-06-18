@@ -1,0 +1,32 @@
+<!--
+  Generated template for the AllAddressPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>AllAddress</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card *ngFor="let h of list_address">
+    <ion-card-header>
+      {{h.firstname}} {{h.lastname}}
+    </ion-card-header>
+    <ion-card-content color='secondary'>
+
+      {{h.address1}} {{h.address2}}, <br />
+      {{h.city}},{{h.state}}, <br />
+      {{h.country}} - {{h.zip}}
+      <br />
+      <button ion-button clear round color="secondary" (click)="takeAdd(h)">Edit</button>
+      <button ion-button clear round color="danger" (click)="doDelete(h.address_id)">Remove</button>
+    </ion-card-content>
+
+  </ion-card>
+</ion-content>

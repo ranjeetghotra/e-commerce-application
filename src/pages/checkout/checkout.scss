@@ -1,0 +1,89 @@
+
+
+page-checkout ion-header .button-md {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  
+  page-checkout ion-list-header {
+    border: 0 !important;
+  }
+  
+  page-checkout h2 {
+    margin-top: 0 !important;
+    font-weight: bold !important;
+  }
+  
+  page-checkout p {
+    color: #66af2e !important;
+  }
+  
+  page-checkout .total {
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+  }
+  
+  page-checkout ion-list-header {
+    background: #f5f5f5 !important;
+    border-radius: 5px;
+  }
+  
+  page-checkout ion-list-header ion-icon {
+    float: right;
+    margin-right: 10px;
+  }
+  
+  page-checkout ion-item {
+    padding-left: 0 !important;
+  }
+  
+  page-checkout .list-md .item-block .item-inner {
+    border-bottom: 1px solid #f5f5f5;
+  }
+  
+  page-checkout .list-md .item-input:last-child {
+    border-bottom: 1px solid #f5f5f5;
+  }
+  
+  page-checkout .coupon {
+    margin-top: 30px;
+  }
+  
+  page-checkout .coupon .cc {
+    padding-left: 10px;
+    padding-right: 10px;
+    display: block;
+    width: 100%;
+  }
+  
+  page-checkout .coupon span ion-row {
+    margin-top: 10px;
+  }
+  
+  page-checkout .shipAdd {
+    padding-left: 10px;
+    padding-right: 10px;
+    display: block;
+    width: 100%;
+  }
+  
+  page-checkout .c_error {
+    background: #ff8282;
+    color: #f5f5f5;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  page-checkout .c_success {
+    background: #5ec451;
+    color: #f5f5f5;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+  }

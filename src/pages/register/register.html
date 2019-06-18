@@ -1,0 +1,53 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>Register</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="registerForm" novalidate>
+    <!-- Login form -->
+    <div class="list-form">
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="mail" item-start class="text-white"></ion-icon> Email
+        </ion-label>
+        <ion-input type="email" value="" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="lock" item-start class="text-white"></ion-icon> Password
+        </ion-label>
+        <ion-input type="password" value="" formControlName="password"></ion-input>
+      </ion-item>
+    </div>
+    <ion-item>
+      <ion-label floating>
+        <ion-icon name="person" item-start class="text-white"></ion-icon> Name
+      </ion-label>
+      <ion-input type="text" value="" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>
+        <ion-icon name="call" item-start class="text-white"></ion-icon> Mobile
+      </ion-label>
+      <ion-input type="number" value="" formControlName="phone"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Account Type</ion-label>
+      <ion-select formControlName="type">
+        <ion-option value="Customer">Customer</ion-option>
+        <ion-option value="Wholesaler">Wholesaler</ion-option>
+        <ion-option value="Consultant">Consultant</ion-option>
+      </ion-select>
+    </ion-item>
+    <div> <button type="submit" ion-button icon-start block color="dark" [disabled]="!registerForm.valid"
+        (click)="register()"> Register </button> <button type="button" ion-button icon-start block color="light"
+        (click)="loginBack()"> Login </button> </div>
+  </form>
+</ion-content>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "517261210021",
+    "firebase_url": "https://testing-1560163158388.firebaseio.com",
+    "project_id": "testing-1560163158388",
+    "storage_bucket": "testing-1560163158388.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517261210021:android:4dc68242f0266c68",
+        "android_client_info": {
+          "package_name": "com.swasthyashopee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517261210021-60dig8ppsv2asgf65t35i52a3h8u36f1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8om4l3ipdAfAsnHv3ypFkVt-heX_m7uY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517261210021-60dig8ppsv2asgf65t35i52a3h8u36f1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar color="secondary"> <button ion-button icon-only menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Orders</ion-title>
+  </ion-navbar>
+  <ion-segment [(ngModel)]="orderSeg" (ionChange)="segmentChanged($event)" color="secondary">
+    <ion-segment-button value="ongoing"> Ongoing </ion-segment-button>
+    <ion-segment-button value="history"> History </ion-segment-button>
+  </ion-segment>
+</ion-header>
+<ion-content>
+  <div [ngSwitch]="orderSeg"> <span *ngSwitchCase="'ongoing'">
+      <ion-row class="orow" *ngFor="let order of ongoing" (tap)="detail(order.oid)">
+        <ion-col col-3> <span class="oid"> #{{order.oid}} </span> </ion-col>
+        <ion-col col-9 class="odetail">
+          <p>Placed on: <span>{{order.placedOn}}</span></p>
+          <p>Payment: <span>
+              <ion-badge color="secondary" *ngIf="order.payment_status=='paid'">Complete</ion-badge>
+              <ion-badge color="danger" *ngIf="order.payment_status=='due'">Pending</ion-badge>
+            </span></p>
+          <p>Delivery: <span>
+              <ion-badge color="secondary" *ngIf="order.delivery_status!=='pending'">Complete</ion-badge>
+              <ion-badge color="danger" *ngIf="order.delivery_status=='pending'">Pending</ion-badge>
+            </span></p>
+        </ion-col>
+      </ion-row>
+    </span> <span *ngSwitchCase="'history'">
+      <ion-row class="orow" *ngFor="let order of completed" (tap)="detail(order.oid)">
+        <ion-col col-3> <span class="oid"> #{{order.oid}} </span> </ion-col>
+        <ion-col col-9 class="odetail">
+          <p>Placed on: <span>{{order.placedOn}}</span></p>
+          <p>Payment: <span>
+              <ion-badge color="secondary">Complete</ion-badge>
+            </span></p>
+          <p>Delivery: <span>
+              <ion-badge color="secondary">Complete</ion-badge>
+            </span></p>
+        </ion-col>
+      </ion-row>
+    </span> </div>
+</ion-content>
