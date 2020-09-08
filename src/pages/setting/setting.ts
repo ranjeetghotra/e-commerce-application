@@ -50,12 +50,15 @@ all_address(){
     
 }
 privacy () {
-    var browser = this.iab.create('http://43.225.52.47/~swasthyashoppe/home/legal/privacy_policy');
+    var browser = this.iab.create('http://swasthyashoppe.com/home/legal/privacy_policy');
     browser.show();
 };
 about () {
-    var browser2 = this.iab.create('http://43.225.52.47/~swasthyashoppe/home/page/About');
+    var browser2 = this.iab.create('http://swasthyashoppe.com/home/page/About');
     browser2.show();
 };
+contact() {
+    this.navCtrl.push("ContactPage");
+  }
 
 }

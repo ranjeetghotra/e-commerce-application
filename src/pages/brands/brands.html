@@ -4,12 +4,22 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-row class="slidesProd">
+  <ion-row *ngIf="products.length>0" class="slidesProd">
     <ion-col col-6 *ngFor="let z of products" class="prodItem"
       (click)="product(z.id,z.name,z.images[0].src, z.short_description, z.price)">
       <div class="image" [style.backgroundImage]="'url(' + z.images[0].src + ')'"> </div>
       <h1>{{z.name}}</h1>
       <p class="price">&#8377; {{z.price}}</p>
-    </ion-col>
+    </ion-col> 
   </ion-row>
+  <span *ngIf="products.length==0" style="margin-top:56px" class="no_ok">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3></ion-col>
+          <ion-col col-6> <img src="assets/imgs/icons/empty_wishlist.png"> </ion-col>
+          <ion-col col-3></ion-col>
+          <ion-col col-12> <button ion-button block small color="danger" clear>No Product Found</button> </ion-col>
+        </ion-row>
+      </ion-grid>
+    </span>
 </ion-content>

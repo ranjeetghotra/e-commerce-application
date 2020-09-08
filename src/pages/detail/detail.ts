@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 
@@ -44,7 +44,9 @@ export class DetailPage {
             delivery_status:any;
             payment_type :any;
             placedOn :any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http:HttpClient,public storage:Storage) {
+            cancelbtn:boolean = false;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http:HttpClient,public storage:Storage,
+    private alertCtrl: AlertController) {
     this.navCtrl = navCtrl;
     this.navParams = navParams;
     this.http = http;
@@ -55,7 +57,7 @@ ionViewDidLoad() {
     var _this = this;
     console.log('ionViewDidLoad OrdersPage');
     this.storage.get('USER_KEY').then(function (val) {
-        _this.http.get('http://43.225.52.47/~swasthyashoppe/api/orderDetail.php?oid=' + _this.oid + '&buyer=' + val).subscribe(function (data) {
+        _this.http.get('http://swasthyashoppe.com/api/orderDetail.php?oid=' + _this.oid + '&buyer=' + val).subscribe(function (data) {
             _this.details = data;
             _this.products = data['products'];
             _this.fname = data['shipping']['firstname'];
@@ -83,8 +85,41 @@ ionViewDidLoad() {
             _this.delivery_status = data['delivery_status'];
             _this.payment_type = data['payment_type'];
             _this.placedOn = data['placedOn'];
+            _this.cancelbtn = ((data['status']!='cancel'||data['status']==''||data['status']!='delivered')?true:false);
         });
     });
 };
+order_cancel(){
+  var that = this;
+  let alert = this.alertCtrl.create({
+      title: 'Confirm',
+      message: 'Do you want cancel?',
+      buttons: [
+          {
+              text: 'Cancel',
+              role: 'cancel',
+              handler: () => {
+                  console.log('Cancel clicked');
+              }
+          },
+          {
+              text: 'Yes',
+              handler: () => {
+                  that.order_cancel_it();
+                  console.log('Yes clicked');
+              }
+          }
+      ]
+  });
+  alert.present();
+}
+order_cancel_it(){
+  var _this = this;
+  _this.http.get('http://swasthyashoppe.com/api/order_cancel.php?id=' + _this.oid).subscribe(function (data) {
+    if(data['status']=='OK'){
+      _this.navCtrl.parent.select(3);
+    }
+})
+}
 
 }

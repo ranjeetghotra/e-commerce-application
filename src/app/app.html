@@ -1,9 +1,9 @@
 <ion-menu [content]="content">
-    <ion-header class="sideHeader"> 
+    <ion-header class="sideHeader">
         <img src="assets/imgs/icon.png">
-         <span class="name">Customer Shop</span>
-          <span class="wallet">Wallet: &#8377; 1235</span>
-         </ion-header>
+        <span class="name">{{customer_name}}</span>
+        <span class="wallet">Wallet: &#8377; {{wallet_balance}}</span>
+    </ion-header>
     <ion-content class="belowHeader">
         <ion-list>
             <ion-item ion-item *ngFor="let p of cats;  let i=index" class="sidebarMenu">
@@ -40,35 +40,47 @@
                     </ion-col>
                 </ion-row>
             </ion-item>
+            <ion-item-divider style="height:5px"></ion-item-divider>
             <ion-item class="sidebarMenu">
-                <ion-row>
+                <ion-row (tap)="blog();">
                     <!-- Parent Pages  -->
                     <ion-col col-12 class="menu-name">
-                        <span ion-text>
-                            <button menuClose ion-button block clear (tap)="blog();" class="textLeft">Blog</button>
+                        <span ion-text class="textLeft">
+                            Blog
                         </span>
                     </ion-col>
                 </ion-row>
             </ion-item>
             <ion-item class="sidebarMenu">
-                <ion-row>
-                    <!-- Parent Pages  -->
-                    <ion-col col-12 class="menu-name">
-                        <button menuClose ion-button block clear (tap)="wallet();" class="textLeft">Wallet</button>
-                    </ion-col>
-                </ion-row>
-            </ion-item>
-            <ion-item class="sidebarMenu">
-                <ion-row>
+                <ion-row (tap)="wallet();">
                     <!-- Parent Pages  -->
                     <ion-col col-12 class="menu-name">
                         <span ion-text>
-                            <button menuClose ion-button block clear (tap)="account();"
-                                class="textLeft">Account</button>
+                            Wallet
                         </span>
                     </ion-col>
                 </ion-row>
             </ion-item>
+            <ion-item class="sidebarMenu">
+                <ion-row (tap)="account();">
+                    <!-- Parent Pages  -->
+                    <ion-col col-12 class="menu-name">
+                        <span ion-text>
+                            Account
+                        </span>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+            <ion-item class="sidebarMenu">
+                    <ion-row (tap)="contact();">
+                        <!-- Parent Pages  -->
+                        <ion-col col-12 class="menu-name">
+                            <span ion-text>
+                                Contact us
+                            </span>
+                        </ion-col>
+                    </ion-row>
+                </ion-item>
         </ion-list>
     </ion-content>
 </ion-menu>

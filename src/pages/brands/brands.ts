@@ -16,7 +16,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BrandsPage {
 title:any;
-products:any;
+products: any = [];
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl:LoadingController,public http:HttpClient) {
  
     var _this = this;
@@ -29,7 +29,7 @@ products:any;
     var loading = this.loadingCtrl.create({
         content: 'Please wait...'
     });
-    this.http.get('http://43.225.52.47/~swasthyashoppe/api/products.php?brand=' + this.navParams.get('id')).subscribe(function (data) {
+    this.http.get('http://swasthyashoppe.com/api/products.php?brand=' + this.navParams.get('id')).subscribe(function (data) {
         console.log(data);
         _this.products = data;
         loading.dismiss();

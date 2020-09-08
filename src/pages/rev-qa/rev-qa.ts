@@ -48,10 +48,10 @@ export class RevQaPage {
     if (this.section == 'review') {
         this.title = 'Write a Review';
         this.storage.get('USER_KEY').then(function (val) {
-            _this.http.get('http://43.225.52.47/~swasthyashoppe/api/new_review.php?pid=' + _this.pid + '&uid=' + val + '&check=1').subscribe(function (data2) {
+            _this.http.get('http://swasthyashoppe.com/api/new_review.php?pid=' + _this.pid + '&uid=' + val + '&check=1').subscribe(function (data2) {
                 if (data2['status'] == 'OK') {
                     _this.showForm = true;
-                    _this.http.get('http://43.225.52.47/~swasthyashoppe/api/new_review.php').subscribe(function (data) {
+                    _this.http.get('http://swasthyashoppe.com/api/new_review.php').subscribe(function (data) {
                         _this.q = data;
                         console.log(data);
                     });
@@ -109,7 +109,7 @@ submit() {
         console.log(this.answer);
         if (this.canSubmit) {
             this.storage.get('USER_KEY').then(function (val) {
-                _this.http.get('http://43.225.52.47/~swasthyashoppe/api/new_review.php?pid=' + _this.pid + '&uid=' + val + '&rating=' + _this.rating + '&answers=' + _this.answer).subscribe(function (data) {
+                _this.http.get('http://swasthyashoppe.com/api/new_review.php?pid=' + _this.pid + '&uid=' + val + '&rating=' + _this.rating + '&answers=' + _this.answer).subscribe(function () {
                     var toast = _this.toastCtrl.create({
                         message: 'Thankyou, your review have been submitted',
                         duration: 3000,
@@ -136,7 +136,7 @@ submit2() {
     var _this = this;
     if (this.question !== '') {
         this.storage.get('USER_KEY').then(function (val) {
-            _this.http.get('http://43.225.52.47/~swasthyashoppe/api/new_question.php?pid=' + _this.pid + '&uid=' + val + '&question=' + _this.question).subscribe(function (data) {
+            _this.http.get('http://swasthyashoppe.com/api/new_question.php?pid=' + _this.pid + '&uid=' + val + '&question=' + _this.question).subscribe(function () {
                 var toast = _this.toastCtrl.create({
                     message: 'Thankyou, your question have been submitted',
                     duration: 3000,

@@ -12,43 +12,43 @@ import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
-  selector: 'page-orders',
-  templateUrl: 'orders.html',
+    selector: 'page-orders',
+    templateUrl: 'orders.html',
 })
 export class OrdersPage {
-orderSeg:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http:HttpClient, public storage:Storage) {
-    this.navCtrl = navCtrl;
-    this.navParams = navParams;
-    this.http = http;
-    this.storage = storage;
-    this.orderSeg = 'ongoing';
-}
-ongoing:any;
-ionViewDidLoad () {
-    var _this = this;
-    console.log('ionViewDidLoad OrdersPage');
-    this.storage.get('USER_KEY').then(function (val) {
-        _this.http.get('http://43.225.52.47/~swasthyashoppe/api/orders.php?uid=' + val + '&section=ongoing').subscribe(function (data) {
-            _this.ongoing = data;
-        });
-    });
-};
-completed:any;
-segmentChanged (event) {
-    var _this = this;
-    if (event['_value'] == 'history') {
+    orderSeg: any;
+    constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public storage: Storage) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.http = http;
+        this.storage = storage;
+        this.orderSeg = 'ongoing';
+    }
+    ongoing: any;
+    ionViewWillEnter() {
+        var _this = this;
+        console.log('ionViewDidLoad OrdersPage');
         this.storage.get('USER_KEY').then(function (val) {
-            _this.http.get('http://43.225.52.47/~swasthyashoppe/api/orders.php?uid=' + val + '&section=history').subscribe(function (data) {
-                _this.completed = data;
+            _this.http.get('http://swasthyashoppe.com/api/orders.php?uid=' + val + '&section=ongoing').subscribe(function (data) {
+                _this.ongoing = data;
             });
         });
-    }
-    else {
-        this.ionViewDidLoad();
-    }
-};
-detail (oid) {
-    this.navCtrl.push('DetailPage', { oid: oid });
-};
+    };
+    completed: any;
+    segmentChanged(event) {
+        var _this = this;
+        if (event['_value'] == 'history') {
+            this.storage.get('USER_KEY').then(function (val) {
+                _this.http.get('http://swasthyashoppe.com/api/orders.php?uid=' + val + '&section=history').subscribe(function (data) {
+                    _this.completed = data;
+                });
+            });
+        }
+        else {
+            _this.ionViewWillEnter();
+        }
+    };
+    detail(oid) {
+        this.navCtrl.push('DetailPage', { oid: oid });
+    };
 }

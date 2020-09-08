@@ -22,7 +22,7 @@ export class CatPage {
   searchActive:any;
   title:any;
   cats:any;
-   
+  searchbar:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public http:HttpClient,
     public actionSheetCtrl:ActionSheetController,public toastCtrl:ToastController,
@@ -41,11 +41,11 @@ export class CatPage {
     this.order = 'DESC';
     this.searchActive = false;
     this.title = this.navParams.get('name');
-    this.http.get('http://43.225.52.47/~swasthyashoppe/api/sub_categories.php?id=' + this.navParams.get('id')).subscribe(function (data) {
+    this.http.get('http://swasthyashoppe.com/api/sub_categories.php?id=' + this.navParams.get('id')).subscribe(function (data) {
         //console.log(data);
         _this.cats = data;
     });
-    this.http.get('http://43.225.52.47/~swasthyashoppe/api/products.php?cat=' + this.navParams.get('id') + '&page=' + this.page + '&column=' + this.column + '&order=' + this.order).subscribe(function (data) {
+    this.http.get('http://swasthyashoppe.com/api/products.php?cat=' + this.navParams.get('id') + '&page=' + this.page + '&column=' + this.column + '&order=' + this.order).subscribe(function (data) {
         //console.log(data);
         _this.products = data;
         _this.page = _this.page + 10;
@@ -68,30 +68,33 @@ doFilter (column, order) {
         content: 'Applying filters...'
     });
     loading.present();
-    this.http.get('http://43.225.52.47/~swasthyashoppe/api/products.php?cat=' + this.navParams.get('id') + '&page=' + this.page + '&column=' + column + '&order=' + order).subscribe(function (data) {
+    this.http.get('http://swasthyashoppe.com/api/products.php?cat=' + this.navParams.get('id') + '&page=' + this.page + '&column=' + column + '&order=' + order).subscribe(function (data) {
         //console.log(data);
         _this.products = data;
         _this.page = _this.page + 10;
         loading.dismiss();
     });
 };
-onSearch (event) {
+onSearch (event = '') {
     var _this = this;
     console.log(this.searchString);
-    this.http.get('http://43.225.52.47/~swasthyashoppe/api/products.php?cat=' + this.navParams.get('id') + '&page=10&column=product_id&order=DESC&like=' + this.searchString).subscribe(function (data) {
+    this.http.get('http://swasthyashoppe.com/api/products.php?cat=' + this.navParams.get('id') + '&page=10&column=product_id&order=DESC&like=' + this.searchString).subscribe(function (data) {
         //console.log(data);
         _this.products = data;
     });
 };
-searchbar:any;
 startSearch () {
     var _this = this;
     this.searchActive = true;
-    setTimeout(function () {
+    setTimeout(() => {
         _this.searchbar.setFocus();
-    }, 50);
+    }, 200);
+
 };
 closeSearch () {
+    var that = this;
+    that.searchString = "";
+    that.onSearch();
     this.searchActive = false;
 };
 filter () {
@@ -143,7 +146,7 @@ filter () {
 };
 doInfinite (infiniteScroll) {
     var _this = this;
-    this.http.get('http://43.225.52.47/~swasthyashoppe/api/products.php?cat=' + this.navParams.get('id') + '&page=' + this.page + '&column=' + this.column + '&order=' + this.order).subscribe(function (data:any) {
+    this.http.get('http://swasthyashoppe.com/api/products.php?cat=' + this.navParams.get('id') + '&page=' + this.page + '&column=' + this.column + '&order=' + this.order).subscribe(function (data:any) {
         console.log(data);
         var len = data.length;
         if (data.length > 0) {

@@ -40,6 +40,7 @@ export class AddAddressPage {
               position: 'bottom',
               showCloseButton: true
             });
+            that.navCtrl.pop();
             toast.present();
           } else {
             var toast = that.toastCtrl.create({

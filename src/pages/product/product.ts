@@ -36,6 +36,14 @@ export class ProductPage {
  rv_a:any;
  rv_q:any;
  qa:any;
+ zipCode:string='';
+ shipCost:number=0;
+ shipTime:string="";
+ zipmsg:string="";
+ isZipSet:boolean=false;
+ isvarient:boolean=false;
+ producturl:string;
+ varient:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public http:HttpClient,
     public storage:Storage, 
@@ -58,6 +66,7 @@ export class ProductPage {
     this.title = '';
     this.image = '';
     this.short_desc = '';
+    this.producturl = ''
     this.price = '';
     this.shownGroup = null;
     this.id = this.navParams.get('id');
@@ -69,8 +78,10 @@ export class ProductPage {
     this.stock = this.navParams.get('stock');
     //console.log(this.navParams.get('name'));
     //console.log(this.navParams.get('image'));
-    this.http.get('http://43.225.52.47/~swasthyashoppe/api/product_detail.php?pid=' + this.id).subscribe(function (data) {
-        //console.log(data);
+    this.http.get('http://swasthyashoppe.com/api/product_detail.php?pid=' + this.id).subscribe(function (data) {
+        console.log(data);
+        console.log('product_fethed');
+        _this.producturl = data[0]['url'];
         if (data[0]['bulk_applicable'] == 'YES') {
             _this.bulk_status = true;
             _this.bulk = data[0]['plans'];
@@ -95,10 +106,14 @@ export class ProductPage {
             //console.log(this.rv_q);
             //console.log(this.rv);
         }
+        if (data[0]['isvarients'] == 'YES') {
+            console.log("oo");
+            _this.isvarient = true;
+            _this.varient = data[0]['varients'];
+        }
         _this.detail = data[0]['product_detail'];
-        console.log(_this.detail);
     });
-    this.http.get('http://43.225.52.47/~swasthyashoppe/api/products.php?cat=1').subscribe(function (data) {
+    this.http.get('http://swasthyashoppe.com/api/products.php?cat=1').subscribe(function (data) {
         //console.log(data);
         _this.prods = data;
     });
@@ -127,7 +142,7 @@ addToCart(pid) {
     console.log(pid);
     this.storage.get('USER_KEY').then(function (val) {
         console.log('User Key is', val);
-        _this.http.get('http://43.225.52.47/~swasthyashoppe/api/addToCart.php?product=' + pid + '&uid=' + val).subscribe(function (data) {
+        _this.http.get('http://swasthyashoppe.com/api/addToCart.php?product=' + pid + '&uid=' + val).subscribe(function (data) {
             //console.log(data);
             console.log(data);
             if (data['status'] == 'OK') {
@@ -152,12 +167,42 @@ addToCart(pid) {
         });
     });
 };
+bulkToCart(pid,qty) {
+    var _this = this;
+    console.log(pid);
+    this.storage.get('USER_KEY').then(function (val) {
+        console.log('User Key is', val);
+        _this.http.get('http://swasthyashoppe.com/api/addToCart.php?product=' + pid + '&uid=' + val+ '&qty=' + qty).subscribe(function (data) {
+            //console.log(data);
+            console.log(data);
+            if (data['status'] == 'OK') {
+                var toast = _this.toastCtrl.create({
+                    message: data['msg'],
+                    duration: 3000,
+                    position: 'bottom',
+                    showCloseButton: true
+                });
+                toast.present();
+                _this.events.publish('cart:added', qty, Date.now()); 
+            }
+            else {
+                var toast = _this.toastCtrl.create({
+                    message: data['msg'],
+                    duration: 3000,
+                    position: 'bottom',
+                    showCloseButton: true
+                });
+                toast.present();
+            }
+        });
+    });
+};
 addToWish(pid) {
     var _this = this;
     console.log(pid);
     this.storage.get('USER_KEY').then(function (val) {
         console.log('User Key is', val);
-        _this.http.get('http://43.225.52.47/~swasthyashoppe/api/addToWish.php?product=' + pid + '&uid=' + val).subscribe(function (data) {
+        _this.http.get('http://swasthyashoppe.com/api/addToWish.php?product=' + pid + '&uid=' + val).subscribe(function (data) {
             //console.log(data);
             console.log(data);
             if (data['status'] == 'OK') {
@@ -185,9 +230,10 @@ play(id) {
     console.log(id);
     this.youtube.openVideo(id);
 };
-share(id, title, image) {
-    var url = 'http://43.225.52.47/~swasthyashoppe/' + id + '/' + title;
-    this.socialSharing.share(title, '', image, url);
+share(title, image, purl) {
+    //var purl = this.producturl;
+    //console.log('('+purl+')');
+    this.socialSharing.share(title, '', image, purl);
 };
 addReview(id) {
     this.navCtrl.push('RevQaPage', { section: 'review', pid: id });
@@ -198,8 +244,9 @@ askQuestion(id) {
 openBlog(title, desc, image) {
     this.navCtrl.push('BlogDetailPage', { title: title, desc: desc, image: image });
 };
-product(id, name, image, short_desc, price, video) {
-    this.navCtrl.push('ProductPage', { id: id, name: name, image: image, short_desc: short_desc, price: price, video: video });
+product(id, name, image, short_desc, price, video, stock) {
+    this.navCtrl.push('ProductPage', { id: id, name: name, image: image, short_desc: short_desc, price: price, video: video, stock: stock });
+    //this.navCtrl.push('ProductPage', { id: id, name: name, image: image, short_desc: short_desc, price: price, video: video });
 };
 oye() {
     var toast = this.toastCtrl.create({
@@ -211,4 +258,29 @@ oye() {
     });
     toast.present();
 };
+zipFetch(){
+    var _this = this;
+    if(_this.zipCode.length==6){
+    _this.http.get('http://swasthyashoppe.com/home/pincode_check/' +_this.zipCode).subscribe(function (data) {
+            //console.log(data);
+            console.log(data);
+            if (data['cost'] != 'null' && data['time'] != 'null') {
+                _this.shipCost = data['cost'];
+                _this.shipTime = data['time'];
+                _this.isZipSet = true;
+                _this.zipmsg = "shipping cost is "+_this.shipCost+" and deliver within "+_this.shipTime;
+            }
+            else {
+                _this.isZipSet = false;
+            }
+        });
+    }
+    else{
+        _this.isZipSet = true;
+        _this.zipmsg = "enter valid zip code"
+    }
+}
+openvarient(id, name, image, short_desc, price, video, stock){
+    this.navCtrl.push('ProductPage', { id: id, name: name, image: image, short_desc: short_desc, price: price, video: video, stock: stock });
+}
 }

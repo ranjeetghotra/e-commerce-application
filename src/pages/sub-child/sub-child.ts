@@ -41,7 +41,7 @@ export class SubChildPage {
     this.order = 'DESC';
     this.searchActive = false;
     this.title = this.navParams.get('name');
-    this.http.get('http://43.225.52.47/~swasthyashoppe/api/products.php?child=' + this.navParams.get('id') + '&page=' + this.page + '&column=' + this.column + '&order=' + this.order).subscribe(function (data) {
+    this.http.get('http://swasthyashoppe.com/api/products.php?child=' + this.navParams.get('id') + '&page=' + this.page + '&column=' + this.column + '&order=' + this.order).subscribe(function (data) {
         console.log(_this.navParams.get('id'));
         _this.products = data;
         _this.page = _this.page + 10;
@@ -60,7 +60,7 @@ doFilter(column, order) {
         content: 'Applying filters...'
     });
     loading.present();
-    this.http.get('http://43.225.52.47/~swasthyashoppe/api/products.php?child=' + this.navParams.get('id') + '&page=' + this.page + '&column=' + column + '&order=' + order).subscribe(function (data) {
+    this.http.get('http://swasthyashoppe.com/api/products.php?child=' + this.navParams.get('id') + '&page=' + this.page + '&column=' + column + '&order=' + order).subscribe(function (data) {
         //console.log(data);
         _this.products = data;
         _this.page = _this.page + 10;
@@ -70,7 +70,7 @@ doFilter(column, order) {
 onSearch(event) {
     var _this = this;
     console.log(this.searchString);
-    this.http.get('http://43.225.52.47/~swasthyashoppe/api/products.php?child=' + this.navParams.get('id') + '&page=10&column=product_id&order=DESC&like=' + this.searchString).subscribe(function (data) {
+    this.http.get('http://swasthyashoppe.com/api/products.php?child=' + this.navParams.get('id') + '&page=10&column=product_id&order=DESC&like=' + this.searchString).subscribe(function (data) {
         //console.log(data);
         _this.products = data;
     });
@@ -135,7 +135,7 @@ filter() {
 doInfinite(infiniteScroll) {
     var _this = this;
     setTimeout(function () {
-        _this.http.get('http://43.225.52.47/~swasthyashoppe/api/products.php?child=' + _this.navParams.get('id') + '&page=' + _this.page + '&column=' + _this.column + '&order=' + _this.order).subscribe(function (data:any) {
+        _this.http.get('http://swasthyashoppe.com/api/products.php?child=' + _this.navParams.get('id') + '&page=' + _this.page + '&column=' + _this.column + '&order=' + _this.order).subscribe(function (data:any) {
             console.log(data);
             var len = data.length;
             if (data.length > 0) {

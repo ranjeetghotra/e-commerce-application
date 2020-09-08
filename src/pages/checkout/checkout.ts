@@ -27,6 +27,10 @@ export class CheckoutPage {
   grand: any;
   shipping: any;
   couponForm: any; shippingForm: any;
+  prepaid_cost: number=0;
+  postpaid_cost: number=0;
+  extraship:number = 0;
+  razorkey:string = '';
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public http: HttpClient,
     public storage: Storage,
@@ -36,6 +40,7 @@ export class CheckoutPage {
     public formbuilder: FormBuilder,
     public toastCtrl: ToastController,
     public iab: InAppBrowser) {
+      var _this = this;
     this.navCtrl = navCtrl;
     this.navParams = navParams;
     this.http = http;
@@ -65,19 +70,23 @@ export class CheckoutPage {
       country: ['', Validators.required],
       zip: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]]
     });
+    _this.http.get('http://swasthyashoppe.com/api/razor.php').subscribe(function (data3) {
+          console.log(data3);
+          _this.razorkey = data3[0].key;
+        });
   }
   status: any;
   cart: any;
-  name: any;
-  email: any;
-  contact: any;
+  name: any = " ";
+  email: any = " ";
+  contact: any = " ";
   checksum: any;
-  address1: any;
-  address2: any;
-  city: any;
-  state: any;
-  country: any;
-  zip: any;
+  address1: any = " ";
+  address2: any = " ";
+  city: any = " ";
+  state: any = " ";
+  country: any = " ";
+  zip: any = " ";
 
   ionViewDidEnter() {
     var _this = this;
@@ -87,7 +96,7 @@ export class CheckoutPage {
       });
       loading.present();
       _this.storage.get('COUPON').then(function (val2) {
-        _this.http.get('http://43.225.52.47/~swasthyashoppe/api/cart.php?uid=' + val + '&coupon=' + val2).subscribe(function (data) {
+        _this.http.get('http://swasthyashoppe.com/api/cart.php?uid=' + val + '&coupon=' + val2).subscribe(function (data) {
           console.log(data);
           _this.status = data[0]['status'];
           _this.grand = data[0]['grand'];
@@ -104,6 +113,8 @@ export class CheckoutPage {
           _this.state = data[0]['address']['state'];
           _this.country = data[0]['address']['country'];
           _this.zip = data[0]['address']['zip'];
+          _this.prepaid_cost =  data[0]['extraship']['prepaid'];
+          _this.postpaid_cost =  data[0]['extraship']['postpaid'];
           loading.dismiss();
           // check coupon response
           if (data[0]['coupon_set'] == 'yes') {
@@ -268,15 +279,16 @@ export class CheckoutPage {
     var _this = this;
     var options = {
       description: 'Payment towards selected items',
-      image: 'http://43.225.52.47/~swasthyashoppe/api/media/icon.png',
+      image: 'https://i.imgur.com/o4iSJQk.jpg',
       currency: 'INR',
-      key: 'rzp_test_1DP5mmOlF5G5ag',
-      amount: this.grand * 100,
+      //key: 'rzp_test_1DP5mmOlF5G5ag',
+      key: _this.razorkey,
+      amount: ((+_this.grand + +_this.prepaid_cost) * 100),
       name: 'Swasthya Shopee',
       prefill: {
-        email: this.email,
-        contact: this.contact,
-        name: this.name
+        email: _this.email,
+        contact: _this.contact,
+        name: _this.name
       },
       theme: {
         color: '#5fa62a'
@@ -288,6 +300,7 @@ export class CheckoutPage {
       }
     };
     var successCallback = function (payment_id) {
+      _this.extraship = _this.prepaid_cost;
       _this.checkout('razorpay', payment_id);
     };
     var cancelCallback = function (error) {
@@ -296,39 +309,52 @@ export class CheckoutPage {
     RazorpayCheckout.open(options, successCallback, cancelCallback);
 
   };
-  choosenAddres:any;
-  chooseAddress(){
+  choosenAddres: any;
+  chooseAddress() {
     var that = this;
-    var loading = that.loadingCtrl.create({content: 'Loading information, Please be patient.'})
+    var loading = that.loadingCtrl.create({ content: 'Loading information, Please be patient.' })
     that.storage.get('USER_KEY').then(function (val) {
       that.http.get('http://www.swasthyashoppe.com/api/addToAddress.php?action=select_all&userid=' + val).subscribe(function (data) {
         that.list_address = data;
 
-        
+
         let buttosn = [];
         that.list_address.forEach(element => {
           buttosn.push({
             text: element.firstname + ' ' + element.lastname + ', ' + element.address1 + ', ' +
-                  element.address2 + ',' + element.state + '-'+ element.zip,
+              element.address2 + ',' + element.state + '-' + element.zip,
             role: element.address_id,
             handler: () => {
-              that.choosenAddres=element;
+              that.choosenAddres = element;
               console.log(element);
               that.address1 = element.address1;
               that.address2 = element.address2;
               that.state = element.state;
               that.zip = element.zip;
-              that.city = element.city; 
-              that.country = element.country; 
+              that.city = element.city;
+              that.country = element.country;
               //that.zipCodeChanged(element);
               that.zipCodeChanged_2();
             }
-          } );
+          });
+        });
+        buttosn.push({
+          text: "Enter New Address",
+          handler: () => {
+            that.navCtrl.push('AddAddressPage');
+            /*that.address1 = '';
+            that.address2 = '';
+            that.state = '';
+            that.zip = '';
+            that.city = '';
+            that.country = '';*/
+            console.log('new address');
+          }
         });
 
         let actionSheet = that.actionSheetCtrl.create({
           title: 'Choose an address',
-          buttons:buttosn
+          buttons: buttosn
         });
 
         loading.dismiss();
@@ -340,12 +366,11 @@ export class CheckoutPage {
     var _this = this;
     let buttons: any;
     if (_this.prepaid == false) {
-      if(_this.postpaid)
-      {
+      if (_this.postpaid) {
         buttons = [
-           
+
           {
-            text: 'Cash on Delivery',
+            text: 'Cash on Delivery (₹'+_this.postpaid_cost+' extra)',
             icon: 'cash',
             handler: function () {
               //this.pay();
@@ -355,58 +380,58 @@ export class CheckoutPage {
           {
             text: 'Cancel',
             role: 'cancel',
-            icon: 'close-circle' 
+            icon: 'close-circle'
           }
         ]
       }
-      else{
-        buttons = [ 
+      else {
+        buttons = [
           {
             text: 'Cancel',
             role: 'cancel',
-            icon: 'close-circle' 
+            icon: 'close-circle'
           }
         ]
       }
-      
+
     }
     else {
-      if(_this.postpaid)
-      {
+      if (_this.postpaid) {
         buttons = [
           {
-            text: 'Pay via RazorPay',
+            text: 'Pay via RazorPay (₹'+_this.prepaid_cost+' extra)',
             icon: 'cash',
             handler: function () {
               _this.pay();
             }
           }//, {
-           // text: 'Pay Via Wallet',
-           // icon: 'cash',
-           // handler: function () {
-              // this.pay();
-           // }
+          // text: 'Pay Via Wallet',
+          // icon: 'cash',
+          // handler: function () {
+          // this.pay();
+          // }
           //}
           ,
           {
-            text: 'Cash on Delivery',
+            text: 'Cash on Delivery (₹'+_this.postpaid_cost+' extra)',
             icon: 'cash',
             handler: function () {
               //this.pay();
               _this.checkout('cash_on_delivery', '');
+              _this.extraship = _this.postpaid_cost;
             }
           },
           {
             text: 'Cancel',
             role: 'cancel',
-            icon: 'close-circle' 
+            icon: 'close-circle'
           }
         ]
       }
-      else{
+      else {
         buttons = [
           {
-            text: 'Pay via RazorPay',
+            text: 'Pay via RazorPay (₹'+_this.prepaid_cost+' extra)',
             icon: 'cash',
             handler: function () {
               _this.pay();
@@ -417,15 +442,15 @@ export class CheckoutPage {
             handler: function () {
                this.pay();
             }
-          }*/, 
+          }*/,
           {
             text: 'Cancel',
             role: 'cancel',
-            icon: 'close-circle' 
+            icon: 'close-circle'
           }
         ]
       }
-      
+
     }
     var actionSheet = this.actionSheetCtrl.create({
       title: 'Choose a payment method',
@@ -469,7 +494,7 @@ export class CheckoutPage {
       });
       loading.present();
       _this.storage.get('COUPON').then(function (val2) {
-        _this.http.get('http://43.225.52.47/~swasthyashoppe/api/checkout.php?uid=' + val + '&coupon=' + val2 + '&type=' + type + '&add1=' + _this.shippingForm.get('address1').value + '&add2=' + _this.shippingForm.get('address2').value + '&city=' + _this.shippingForm.get('city') + '&state=' + _this.shippingForm.get('state') + '&country=' + _this.shippingForm.get('country') + '&zip=' + _this.shippingForm.get('zip').value + '&payment_id=' + payment_id).subscribe(function (data) {
+        _this.http.get('http://swasthyashoppe.com/api/checkout.php?uid=' + val + '&coupon=' + val2 + '&type=' + type + '&add1=' + _this.shippingForm.get('address1').value + '&add2=' + _this.shippingForm.get('address2').value + '&city=' + _this.shippingForm.get('city').value + '&state=' + _this.shippingForm.get('state').value + '&country=' + _this.shippingForm.get('country').value + '&zip=' + _this.shippingForm.get('zip').value + '&payment_id=' + payment_id + '&extraship='+_this.extraship).subscribe(function (data) {
           console.log(data);
           _this.status = data['status'];
           if (_this.status == 'OK') {

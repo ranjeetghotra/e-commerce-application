@@ -4,7 +4,6 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
 import { TabsPage } from '../pages/tabs/tabs';
 import { HomePage } from '../pages/home/home';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
@@ -24,7 +23,6 @@ import { Push, PushObject, PushOptions } from '@ionic-native/push';
   declarations: [
     MyApp,
     AboutPage,
-    ContactPage,
     HomePage,
     TabsPage
   ],
@@ -39,7 +37,6 @@ import { Push, PushObject, PushOptions } from '@ionic-native/push';
   entryComponents: [
     MyApp,
     AboutPage,
-    ContactPage,
     HomePage,
     TabsPage
   ],

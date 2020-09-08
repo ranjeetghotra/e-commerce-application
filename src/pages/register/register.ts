@@ -47,7 +47,7 @@ registerForm:any;
         console.log(this.registerForm.get('email').value);
         console.log(this.registerForm.get('password').value);
         //this.registerForm.get('email').value;
-        this.http.get('http://43.225.52.47/~swasthyashoppe/api/register.php?username=' + this.registerForm.get('email').value + '&password=' + this.registerForm.get('password').value + '&name=' + this.registerForm.get('name').value + '&type=' + this.registerForm.get('type').value + '&phone=' + this.registerForm.get('phone').value).subscribe(function (data) {
+        this.http.get('http://swasthyashoppe.com/api/register.php?username=' + this.registerForm.get('email').value + '&password=' + this.registerForm.get('password').value + '&name=' + this.registerForm.get('name').value + '&type=' + this.registerForm.get('type').value + '&phone=' + this.registerForm.get('phone').value).subscribe(function (data) {
             console.log(data);
             if (data['status'] == 'OK') {
                 _this.storage.set('USER_KEY', data['USER_KEY']).then(function () {

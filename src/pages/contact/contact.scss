@@ -1,3 +1,22 @@
 page-contact {
-
+    .menu-bar{
+        margin: 20px 0 0;
+        padding: 0;
+        background-color: #F8FBEF;
+        box-shadow: 0px 3px 3px rgba(220, 220, 220, 0.8)
+    }
+    .menu-bar .row,.menu-bar .row .col, .menu-bar .row .col a{
+        padding: 0;
+        margin:0;
+    }
+    .address-card{
+        margin: 20px 0;
+        box-shadow: 0px 3px 3px rgba(220, 220, 220, 0.8),0px -3px 3px rgba(220, 220, 220, 0.8);
+        width: 100%;
+    }
+    .form-card{
+        margin: 0;
+        box-shadow: 0px -3px 3px rgba(220, 220, 220, 0.8);
+        width: 100%;
+    }
 }

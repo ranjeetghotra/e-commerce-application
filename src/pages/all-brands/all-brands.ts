@@ -22,7 +22,7 @@ export class AllBrandsPage {
     this.navCtrl = navCtrl;
     this.navParams = navParams;
     this.http = http;
-    this.http.get('http://43.225.52.47/~swasthyashoppe/api/brands.php?action=all').subscribe(function (data2) {
+    this.http.get('http://swasthyashoppe.com/api/brands.php?action=all').subscribe(function (data2) {
         console.log(data2);
         _this.brands = data2;
     });

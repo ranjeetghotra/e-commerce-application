@@ -30,28 +30,28 @@
         <form [formGroup]="shippingForm" novalidate>
           <ion-item>
             <ion-label stacked>Address Line 1</ion-label>
-            <ion-input type="text" formControlName="address1" value="{{address1}}"></ion-input>
+            <ion-input type="text" formControlName="address1" [(ngModel)]='address1' value=""></ion-input>
           </ion-item>
           <ion-item>
             <ion-label stacked>Address Line 2</ion-label>
-            <ion-input type="text" formControlName="address2" value="{{address2}}"></ion-input>
+            <ion-input type="text" formControlName="address2" [(ngModel)]='address2' value=""></ion-input>
           </ion-item>
           <ion-item>
             <ion-label stacked>City</ion-label>
-            <ion-input type="text" formControlName="city" value="{{city}}"></ion-input>
+            <ion-input type="text" formControlName="city" [(ngModel)]='city' value=""></ion-input>
           </ion-item>
           <ion-item>
             <ion-label stacked>State</ion-label>
-            <ion-input type="text" formControlName="state" value="{{state}}">
+            <ion-input type="text" formControlName="state" [(ngModel)]='state' value="">
             </ion-input>
           </ion-item>
           <ion-item>
             <ion-label stacked>Country</ion-label>
-            <ion-input type="text" formControlName="country" value="{{country}}"></ion-input>
+            <ion-input type="text" formControlName="country" [(ngModel)]='country' value=""></ion-input>
           </ion-item>
           <ion-item>
             <ion-label stacked>Postcode/Zip</ion-label>
-            <ion-input type="number" (change)="zipCodeChanged($event)" formControlName="zip" value="{{zip}}">
+            <ion-input type="number" (change)="zipCodeChanged($event)" [(ngModel)]='zip' formControlName="zip" value="">
             </ion-input>
           </ion-item>
         </form>

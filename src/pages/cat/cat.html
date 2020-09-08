@@ -13,14 +13,14 @@
       </button> </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content>
+<ion-content> 
   <ion-slides class="slidesCat" slidesPerView="2.5">
     <ion-slide class="all"> All </ion-slide>
     <ion-slide *ngFor="let x of cats" (tap)="sub(x.id, x.name)"> {{x.name}} </ion-slide>
   </ion-slides>
-  <ion-row class="slidesProd">
+  <ion-row *ngIf="products.length>0" class="slidesProd">
     <ion-col col-6 *ngFor="let z of products" class="prodItem"
-      (tap)="product(z.id,z.name,z.images[0].src,z.short_description, z.price, z.video, z.stock);">
+    (tap)="product(z.id,z.name,z.images[0].src,z.short_description, z.price, z.video, z.stock);">
       <div class="discount" *ngIf="z.hasDiscount && z.stock > 0"> {{z.discount}} </div>
       <div class="stock" *ngIf="z.stock == 0"> Out of Stock </div>
       <div class="image" [style.backgroundImage]="'url(' + z.images[0].src + ')'"> </div>
@@ -29,6 +29,16 @@
         &#8377; {{z.price}}</p>
     </ion-col>
   </ion-row>
+  <span *ngIf="products.length==0" style="margin-top:56px" class="no_ok">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3></ion-col>
+          <ion-col col-6> <img src="assets/imgs/icons/empty_wishlist.png"> </ion-col>
+          <ion-col col-3></ion-col>
+          <ion-col col-12> <button ion-button block small color="danger" clear>No Product Found</button> </ion-col>
+        </ion-row>
+      </ion-grid>
+    </span>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="!searchActive">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>

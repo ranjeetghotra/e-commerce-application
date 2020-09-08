@@ -7,6 +7,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { Storage } from '@ionic/storage';
 import { TabsPage } from '../tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
 /**
  * Generated class for the LoginPage page.
  *
@@ -29,7 +30,8 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public formbuilder: FormBuilder
     , public http: HttpClient, public toastCtrl: ToastController, public loadingCtrl: LoadingController, private fb: Facebook, private googlePlus: GooglePlus
-  ,private statusBar: StatusBar) {
+  ,private statusBar: StatusBar,private push: Push) {
+    var _this = this;
     this.navCtrl = navCtrl;
     this.formbuilder = formbuilder;
     this.http = http;
@@ -65,7 +67,7 @@ export class LoginPage {
       console.log(this.loginForm.get('email').value);
       console.log(this.loginForm.get('password').value);
       //this.loginForm.get('email').value;
-      this.http.get('http://43.225.52.47/~swasthyashoppe/api/login.php?username=' + this.loginForm.get('email').value + '&password=' + this.loginForm.get('password').value).subscribe(function (data) {
+      this.http.get('http://swasthyashoppe.com/api/login.php?username=' + this.loginForm.get('email').value + '&password=' + this.loginForm.get('password').value).subscribe(function (data) {
         console.log(data);
         if (data['status'] == 'OK') {
           _this.storage.set('USER_KEY', data['USER_KEY']).then(function () {
@@ -76,6 +78,7 @@ export class LoginPage {
               showCloseButton: true
             });
             toast.present();
+            _this.pushsubscribe();
             _this.navCtrl.setRoot(TabsPage);
           });
           loading_1.dismiss();
@@ -103,7 +106,7 @@ export class LoginPage {
         console.log(res);
         that.fb.api('me?fields=id,email,first_name,last_name', []).then(profile => {
           console.log(profile);
-          that.http.get('http://43.225.52.47/~swasthyashoppe/api/login_social.php?firstname=' + profile['first_name'] + '&lastname=' + profile['last_name'] + '&id=' + profile['id'] + '&email=' + profile['email'] + '&type=facebook').subscribe(function (data) {
+          that.http.get('http://swasthyashoppe.com/api/login_social.php?firstname=' + profile['first_name'] + '&lastname=' + profile['last_name'] + '&id=' + profile['id'] + '&email=' + profile['email'] + '&type=facebook').subscribe(function (data) {
             console.log(data);
             if (data['status'] == 'OK') {
               that.storage.set('USER_KEY', data['USER_KEY']).then(function () {
@@ -114,6 +117,7 @@ export class LoginPage {
                   showCloseButton: true
                 });
                 toast.present();
+                that.pushsubscribe();
                 that.navCtrl.setRoot(TabsPage);
               });
               //loading_1.dismiss();
@@ -141,7 +145,7 @@ export class LoginPage {
     gthis.googlePlus.login({})
       .then(res => {
         console.log(res);
-        gthis.http.get('http://43.225.52.47/~swasthyashoppe/api/login_social.php?firstname=' + res.givenName + '&lastname=' + res.familyName + '&id=' + res.userId + '&email=' + res.email + '&type=google').subscribe(function (data) {
+        gthis.http.get('http://swasthyashoppe.com/api/login_social.php?firstname=' + res.givenName + '&lastname=' + res.familyName + '&id=' + res.userId + '&email=' + res.email + '&type=google').subscribe(function (data) {
           console.log(data);
           if (data['status'] == 'OK') {
             gthis.storage.set('USER_KEY', data['USER_KEY']).then(function () {
@@ -152,6 +156,7 @@ export class LoginPage {
                 showCloseButton: true
               });
               toast.present();
+              gthis.pushsubscribe();
               gthis.navCtrl.setRoot(TabsPage);
             });
             //loading_1.dismiss();
@@ -168,10 +173,14 @@ export class LoginPage {
           }
         });
       })
-      .catch(err => console.error(err));
+      .catch(err => { console.log('gog');console.log(err); });
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+  pushsubscribe(){
+    var _this = this;
+    
   }
 
 }

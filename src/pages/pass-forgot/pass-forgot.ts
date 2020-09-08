@@ -45,7 +45,7 @@ loginForm:any;
         loading_1.present();
         console.log(this.loginForm.get('email').value);
         //this.loginForm.get('email').value;
-        this.http.get('http://43.225.52.47/~swasthyashoppe/api/pass_reset.php?user=' + this.loginForm.get('email').value).subscribe(function (data) {
+        this.http.get('http://swasthyashoppe.com/api/pass_reset.php?user=' + this.loginForm.get('email').value).subscribe(function (data) {
             console.log(data);
             if (data['status'] == 'OK') {
                     var toast = _this.toastCtrl.create({

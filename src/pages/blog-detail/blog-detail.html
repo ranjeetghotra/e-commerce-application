@@ -10,4 +10,25 @@
       <p> {{desc}} </p>
     </ion-card-content>
   </ion-card>
+  <ion-card>
+    <ion-card-content *ngFor="let c of comments">
+      <ion-card-title> {{c.user}} </ion-card-title>
+      <p> {{c.comment}} </p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label floating> 
+        <ion-icon name="comment" item-start class="text-white"></ion-icon> Comment
+      </ion-label>
+      <ion-textarea placeholder="" value="" [(ngModel)]='commentin'  autocomplete="on" autocorrect="on">
+      </ion-textarea>
+    </ion-item>
+    <ion-item>
+    <button type="submit" ion-button icon-start block color="dark"
+        (click)="comment()"  [disabled]="commentin.length<5"> Submit </button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -174,4 +174,17 @@ page-product .detailTop h5 {
     padding-left: 10px;
     display: block;
   }
-  
+  page-product .zipcheck{
+    z-index: 5;
+  }
+  page-product .zipcheck{
+    padding: 6px;
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+    z-index: 10
+  }
+  page-product .zipmsg{
+    color: #66af2e;
+    text-align: center;
+  }

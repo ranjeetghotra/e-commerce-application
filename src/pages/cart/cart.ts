@@ -45,7 +45,7 @@ ionViewDidEnter() {
             content: 'Please wait...'
         });
         loading.present();
-        _this.http.get('http://43.225.52.47/~swasthyashoppe/api/cart.php?uid=' + val).subscribe(function (data) {
+        _this.http.get('http://swasthyashoppe.com/api/cart.php?uid=' + val).subscribe(function (data) {
             console.log(data);
             _this.status = data[0]['status'];
             _this.grand = data[0]['grand'];
@@ -67,7 +67,7 @@ upQty(pid) {
             content: 'Updating cart...'
         });
         loading.present();
-        _this.http.get('http://43.225.52.47/~swasthyashoppe/api/cart.php?uid=' + val + '&pid=' + pid + '&do=up').subscribe(function (data) {
+        _this.http.get('http://swasthyashoppe.com/api/cart.php?uid=' + val + '&pid=' + pid + '&do=up').subscribe(function (data) {
             console.log(data);
             _this.status = data[0]['status'];
             _this.grand = data[0]['grand'];
@@ -84,7 +84,7 @@ downQty(pid) {
             content: 'Updating cart...'
         });
         loading.present();
-        _this.http.get('http://43.225.52.47/~swasthyashoppe/api/cart.php?uid=' + val + '&pid=' + pid + '&do=down').subscribe(function (data) {
+        _this.http.get('http://swasthyashoppe.com/api/cart.php?uid=' + val + '&pid=' + pid + '&do=down').subscribe(function (data) {
             console.log(data);
             _this.status = data[0]['status'];
             _this.grand = data[0]['grand'];
@@ -101,7 +101,7 @@ remove(pid) {
             content: 'Removing item...'
         });
         loading.present();
-        _this.http.get('http://43.225.52.47/~swasthyashoppe/api/cart.php?uid=' + val + '&pid=' + pid + '&do=remove').subscribe(function (data) {
+        _this.http.get('http://swasthyashoppe.com/api/cart.php?uid=' + val + '&pid=' + pid + '&do=remove').subscribe(function (data) {
             console.log(data);
             _this.status = data[0]['status'];
             _this.grand = data[0]['grand'];

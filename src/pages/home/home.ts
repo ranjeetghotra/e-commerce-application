@@ -70,7 +70,7 @@ export class HomePage {
     if (this.toggled) {
       setTimeout(function () {
         _this.searchbar.setFocus();
-        _this.http.get('http://43.225.52.47/~swasthyashoppe/api/featured.php').subscribe(function (data3) {
+        _this.http.get('http://swasthyashoppe.com/api/featured.php').subscribe(function (data3) {
           console.log(data3);
           _this.featured = data3;
         });

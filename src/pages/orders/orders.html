@@ -31,10 +31,13 @@
         <ion-col col-9 class="odetail">
           <p>Placed on: <span>{{order.placedOn}}</span></p>
           <p>Payment: <span>
-              <ion-badge color="secondary">Complete</ion-badge>
+            <ion-badge color="secondary" *ngIf="order.payment_status=='paid'">Complete</ion-badge>
+            <ion-badge color="danger" *ngIf="order.payment_status=='due'">Pending</ion-badge>
             </span></p>
           <p>Delivery: <span>
-              <ion-badge color="secondary">Complete</ion-badge>
+            <ion-badge color="secondary" *ngIf="order.delivery_status!=='pending'&&order.delivery_status!=='cancel'">Complete</ion-badge>
+            <ion-badge color="danger" *ngIf="order.delivery_status=='pending'">Pending</ion-badge>
+            <ion-badge color="danger" *ngIf="order.delivery_status=='cancel'">Cancel</ion-badge>
             </span></p>
         </ion-col>
       </ion-row>

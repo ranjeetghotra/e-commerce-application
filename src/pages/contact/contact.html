@@ -1,18 +1,102 @@
-<!--
-  Generated template for the ContactPage page.
+<ion-header no-shadow>
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
+  <ion-navbar color="secondary" no-shadow>
     <ion-title>contact</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content text-center padding-vertical>
+  <img src="assets/imgs/icon.png">
+  <ion-grid class="menu-bar">
+    <ion-row>
+      <ion-col>
+        <a href="tel:+917442414124" ion-button full color="secondary" clear>
+          <ion-icon name="call"></ion-icon>
+          <div>&nbsp; Call</div>
+        </a>
+      </ion-col>
+      <ion-col>
+        <a href = "mailto:info@swasthyashopee.com" ion-button full color="secondary" clear>
+          <ion-icon name="mail"></ion-icon>
+          <div>&nbsp; Email</div>
+        </a>
+      </ion-col>
+      <ion-col>
+        <a href="sms://+917442414124" ion-button full color="secondary" clear>
+          <ion-icon name="send"></ion-icon>
+          <div>&nbsp; Text</div>
+        </a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
+  <ion-card class="address-card">
+      <ion-card-header>
+        Our Address
+      </ion-card-header>
+      <ion-card-content>
+        1 ST FLOOR, F - 677,<br />IN FRONT OF MRF PUNJABI RESTAURANT,<br />INDRAVIHAR, KOTA,<br />RAJASTHAN 324006
+      </ion-card-content>
+    </ion-card>
+
+  <ion-card class="form-card">
+    <ion-card-header>
+      Get in Touch
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="contactForm" novalidate>
+
+        <!-- Contact form -->
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="mail" item-start class="text-white"></ion-icon> Type
+          </ion-label>
+          <ion-select value formControlName="type">
+            <ion-option>Enquiry</ion-option>
+            <ion-option>Complain</ion-option>
+            <ion-option>Suggesstion</ion-option>
+            <ion-option>Testimonial</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="person" item-start class="text-white"></ion-icon> Name
+          </ion-label>
+          <ion-input type="text" value="" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="call" item-start class="text-white"></ion-icon> Mobile
+          </ion-label>
+          <ion-input type="number" value="" formControlName="phone"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="mail" item-start class="text-white"></ion-icon> Email
+          </ion-label>
+          <ion-input type="email" value="" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>
+            <ion-icon name="person" item-start class="text-white"></ion-icon> Subject
+          </ion-label>
+          <ion-input type="text" value="" formControlName="subject"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>
+            <ion-icon name="person" item-start class="text-white"></ion-icon> Message
+          </ion-label>
+          <ion-textarea placeholder="" value="" formControlName="message" autocomplete="on" autocorrect="on">
+          </ion-textarea>
+        </ion-item>
+        <ion-item>
+        <button type="submit" ion-button icon-start block color="dark" [disabled]="!contactForm.valid"
+        (click)="contact()"> Submit </button>
+      </ion-item>
+      </form>
+    </ion-card-content>
+  </ion-card>
+  
 </ion-content>

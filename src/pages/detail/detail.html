@@ -56,5 +56,11 @@
       <ion-icon name="bus" item-start></ion-icon> Delivery <ion-note item-end>{{delivery_status}}
       </ion-note>
     </ion-item>
+    <ion-item *ngIf="cancelbtn">
+      <button ion-button color="danger" icon-start (click)="order_cancel()" block no-shadow>
+          <ion-icon name='close'></ion-icon>
+          Cancel
+        </button>
+    </ion-item>
   </ion-list>
 </ion-content>

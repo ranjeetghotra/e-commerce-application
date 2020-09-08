@@ -28,7 +28,7 @@ export class BlogPage {
         content: 'Please wait...'
     });
     loading.present();
-    this.http.get('http://43.225.52.47/~swasthyashoppe/api/blog.php').subscribe(function (data) {
+    this.http.get('http://swasthyashoppe.com/api/blog.php').subscribe(function (data) {
         console.log(data);
         _this.blogs = data;
         loading.dismiss();
@@ -37,8 +37,8 @@ export class BlogPage {
 ionViewDidLoad() {
     console.log('ionViewDidLoad BlogPage');
 }
-detail(title, desc, image) {
-    this.navCtrl.push('BlogDetailPage', { title: title, desc: desc, image: image });
+detail(id ,title, desc, image) {
+    this.navCtrl.push('BlogDetailPage', { id: id, title: title, desc: desc, image: image });
 }
 
 }

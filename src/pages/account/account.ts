@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController,  Events } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 
@@ -27,7 +27,7 @@ export class AccountPage {
            country :any;
            zip:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:HttpClient,
-    public storage:Storage, public toastCtrl:ToastController, public loadingCtrl:LoadingController) {
+    public storage:Storage, public toastCtrl:ToastController, public loadingCtrl:LoadingController, public events: Events,) {
     this.navCtrl = navCtrl;
     this.navParams = navParams;
     this.http = http;
@@ -43,7 +43,7 @@ ionViewWillEnter () {
             duration: 3000
         });
         loader.present();
-        _this.http.get('http://43.225.52.47/~swasthyashoppe/api/account.php?uid=' + val).subscribe(function (data) {
+        _this.http.get('http://swasthyashoppe.com/api/account.php?uid=' + val).subscribe(function (data) {
             _this.fname = data['fname'];
             _this.lname = data['lname'];
             _this.email = data['email'];
@@ -61,8 +61,9 @@ ionViewWillEnter () {
 update () {
     var _this = this;
     this.storage.get('USER_KEY').then(function (val) {
-        _this.http.get('http://43.225.52.47/~swasthyashoppe/api/account.php?action=update&uid=' + val + '&fname=' + _this.fname + '&lname=' + _this.lname + '&phone=' + _this.phone + '&address1=' + _this.address1 + '&address2=' + _this.address2 + '&city=' + _this.city + '&state=' + _this.state + '&country=' + _this.country + '&zip=' + _this.zip).subscribe(function (data) {
+        _this.http.get('http://swasthyashoppe.com/api/account.php?action=update&uid=' + val + '&fname=' + _this.fname + '&lname=' + _this.lname + '&phone=' + _this.phone + '&address1=' + _this.address1 + '&address2=' + _this.address2 + '&city=' + _this.city + '&state=' + _this.state + '&country=' + _this.country + '&zip=' + _this.zip).subscribe(function (data) {
             if (data['status'] == 'OK') {
+                _this.events.publish('customer_name', _this.fname, Date.now());
                 var toast = _this.toastCtrl.create({
                     message: data['msg'],
                     duration: 3000,
@@ -70,6 +71,7 @@ update () {
                     showCloseButton: true
                 });
                 toast.present();
+                _this.navCtrl.parent.select(4);
             }
             else {
                 var toast = _this.toastCtrl.create({

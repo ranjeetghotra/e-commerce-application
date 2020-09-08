@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="secondary">
-    <ion-title></ion-title>
+    <ion-title>{{title}}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
@@ -9,11 +9,17 @@
     <p>{{short_desc}}
     </p>
   </div>
+  <div *ngIf="isvarient">
+    <ion-select placeholder="select varient">
+      <ion-option click)="openvarient(v.id,v.name, v.image[0].src, v.short_desc, v.price, v.video, v.stock)" *ngFor="let v of varient">{{v.title}}</ion-option>
+    </ion-select>
+  </div>
   <div class="bulk" *ngIf="bulk_status">
     <ion-row *ngFor="let x of bulk">
       <ion-col col-6 class="bulk_image"> <span>on Pack of {{x.quantity}}</span> <img src="{{image}}"> </ion-col>
       <ion-col col-6 class="bulk_details"> <span class="price">&#8377; {{x.price}}</span> <span
-          class="discount">{{x.amount}}% off <br /><del>MRP: ₹{{x.mrp}}</del></span> </ion-col>
+          class="discount">{{x.amount}}% off <br /><del>MRP: ₹{{x.mrp}}</del></span>
+        <div><button ion-button color="secondary"  *ngIf="stock>=x.quantity" (click)="bulkToCart(id,x.quantity);">Add to Cart</button></div> </ion-col>
     </ion-row>
   </div>
   <ion-card *ngIf="detail">
@@ -21,13 +27,20 @@
     <ion-card-content>
       {{detail}} </ion-card-content>
   </ion-card>
+  <div class="zipmsg" *ngIf="isZipSet">
+    {{zipmsg}}
+  </div>
+  <ion-item>
+    <ion-input placeholder="Enter Pin Code" class="zipcode" [(ngModel)]="zipCode" type="number"></ion-input><button class="zipcheck" clear item-right (click)="zipFetch()">Check</button>
+  </ion-item>
   <div class="reviews" *ngIf="rv_status"> <span class="catHead"> <span class="title">Reviews</span> <button ion-button
-        clear small class="action" (click)="addReview(id);">Add Review</button> </span>
+        clear small class="action" (click)="addReview(id);">Add Review</button> 
+        <span *ngIf="rv.length==0">(Be first to add Reviews)</span></span>
     <ion-list>
       <ion-item *ngFor="let r of rv; let i=index" text-wrap class="rvitem"> <span class="rvuser">By {{r.user_name}} on
           {{r.time}}</span> <span class="rvrating">
           <ionic3-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline" activeColor="#EBE85E"
-            defaultColor="#f4f4f4" readonly="true"  > </ionic3-star-rating>
+            defaultColor="#f4f4f4" readonly="true"> </ionic3-star-rating>
         </span>
         <ion-card>
           <ion-card-content> <span *ngFor="let q of rv_q; let i=index"> <span class="rq"> {{q}} </span> <span
@@ -38,7 +51,8 @@
     </ion-list>
   </div>
   <div class="questions" *ngIf="qa_status"> <span class="catHead"> <span class="title">Q&A</span> <button ion-button
-        clear small class="action" (click)="askQuestion(id);">Ask</button> </span>
+        clear small class="action" (click)="askQuestion(id);">Ask</button>
+        <span *ngIf="qa.length==0">(Be first to ask qus)</span></span>
     <ion-list>
       <ion-item *ngFor="let d of qa; let i=index" text-wrap (click)="toggleGroup(i)"
         [ngClass]="{active: isGroupShown(i)}"> {{d.question}} <ion-icon color="success" item-right
@@ -50,7 +64,7 @@
   <ion-row> <span class="catHead"> <span class="title">Related Products</span> </span>
     <ion-slides class="slidesProd" slidesPerView="2.5" spaceBetween="10">
       <ion-slide *ngFor="let z of prods" class="prodItem"
-        (click)="product(z.id,z.name,z.images[0].src, z.short_description, z.price)">
+        (click)="product(z.id,z.name,z.images[0].src, z.short_description, z.price, z.video, z.stock)">
         <div class="image" [style.backgroundImage]="'url(' + z.images[0].src + ')'"> </div>
         <h1>{{z.name}}</h1>
         <p class="price">&#8377; {{z.price}}</p>
@@ -88,9 +102,9 @@
 <ion-fab right top> <button ion-fab color="light">
     <ion-icon name="more"></ion-icon>
   </button>
-  <ion-fab-list side="bottom"> <button ion-fab (click)="share(id, title, image);">
+  <ion-fab-list side="bottom"> <button ion-fab (click)="share(title,image,producturl);">
       <ion-icon name="share"></ion-icon>
-    </button> <button ion-fab (click)="play(youtubeId);">
+    </button> <button *ngIf="!youtubeId" ion-fab (click)="play(youtubeId);">
       <ion-icon name="logo-youtube"></ion-icon>
     </button> <button ion-fab (click)="addToWish(id);">
       <ion-icon name="heart"></ion-icon>
